@@ -1,0 +1,2694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FreshBite - Food Delivery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fffaf5;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #f1e5dc;
+            box-shadow: 0 3px 15px rgba(45, 27, 18, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1250px;
+            margin: auto;
+            height: 72px;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff6b35;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: #ff6b35;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 7px 20px rgba(255, 107, 53, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5e4b42;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .cart-btn {
+            position: relative;
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background: #fff2ea;
+            color: #ff6b35;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -3px;
+
+            min-width: 19px;
+            height: 19px;
+            padding: 0 5px;
+
+            border-radius: 20px;
+            background: #ff6b35;
+            color: white;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-btn {
+            padding: 10px 19px;
+            border-radius: 9px;
+            background: #2d1b12;
+            color: white;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .login-btn:hover {
+            background: #ff6b35;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255, 183, 77, 0.25), transparent 30%),
+                linear-gradient(135deg, #fff1e7 0%, #fffaf5 55%, #ffe9db 100%);
+
+            min-height: 535px;
+        }
+
+        .hero-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 70px 25px 60px;
+
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: white;
+            border: 1px solid #f1ddd0;
+            padding: 9px 15px;
+            border-radius: 30px;
+
+            color: #5e4b42;
+            font-size: 13px;
+            font-weight: 600;
+
+            margin-bottom: 23px;
+        }
+
+        .location i {
+            color: #ff6b35;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.08;
+            margin-bottom: 18px;
+            letter-spacing: -1.8px;
+        }
+
+        .hero h1 span {
+            color: #ff6b35;
+        }
+
+        .hero-description {
+            color: #705e54;
+            max-width: 570px;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 27px;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            max-width: 620px;
+            min-height: 62px;
+
+            background: white;
+            border: 1px solid #eadbd1;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 7px;
+            box-shadow: 0 12px 35px rgba(75, 44, 26, 0.09);
+        }
+
+        .search-box i {
+            color: #ff6b35;
+            margin: 0 14px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+
+            font-family: inherit;
+            font-size: 14px;
+            color: #2d1b12;
+        }
+
+        .search-box input::placeholder {
+            color: #9c8e86;
+        }
+
+        .search-button {
+            border: none;
+            background: #ff6b35;
+            color: white;
+
+            padding: 14px 22px;
+            border-radius: 10px;
+
+            font-weight: 700;
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .search-button:hover {
+            background: #e95a29;
+            transform: translateY(-1px);
+        }
+
+        .popular-searches {
+            margin-top: 13px;
+            color: #8c7a70;
+            font-size: 12px;
+        }
+
+        .popular-searches span {
+            color: #ff6b35;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hero-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .highlight {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #66544a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .highlight i {
+            color: #ff6b35;
+        }
+
+        /* HERO IMAGE */
+
+        .hero-visual {
+            position: relative;
+            min-height: 400px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 390px;
+            height: 390px;
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 14px solid white;
+            box-shadow: 0 25px 55px rgba(71, 39, 20, 0.15);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: 14px;
+            padding: 13px 17px;
+
+            box-shadow: 0 15px 35px rgba(45, 27, 18, 0.12);
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-card i {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #fff0e8;
+            color: #ff6b35;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .floating-card small {
+            color: #88766d;
+            font-size: 10px;
+        }
+
+        .rating-card {
+            left: 10px;
+            top: 70px;
+        }
+
+        .offer-card {
+            right: 0;
+            bottom: 65px;
+        }
+
+        /* ================= COMMON ================= */
+
+        .section {
+            max-width: 1250px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 29px;
+            margin-bottom: 7px;
+        }
+
+        .section-title p {
+            color: #89766c;
+            font-size: 13px;
+        }
+
+        .view-all {
+            color: #ff6b35;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 15px;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid #f0e3da;
+            border-radius: 16px;
+
+            padding: 18px 8px;
+            text-align: center;
+
+            transition: 0.25s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffb08e;
+            box-shadow: 0 12px 25px rgba(68, 38, 20, 0.08);
+        }
+
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            margin: auto auto 11px;
+
+            border-radius: 50%;
+            background: #fff1e8;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .category-card span {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* ================= OFFERS ================= */
+
+        .offers-section {
+            background: #fff;
+        }
+
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 18px;
+        }
+
+        .offer-box {
+            min-height: 190px;
+            border-radius: 20px;
+            padding: 25px;
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .offer-box.main {
+            background: linear-gradient(135deg, #ff6b35, #ff8a5b);
+            color: white;
+        }
+
+        .offer-box.second {
+            background: #fff0e5;
+        }
+
+        .offer-box.third {
+            background: #f8efe8;
+        }
+
+        .offer-box h3 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .offer-box p {
+            font-size: 12px;
+            opacity: 0.85;
+            max-width: 250px;
+            line-height: 1.6;
+        }
+
+        .offer-code {
+            display: inline-block;
+            margin-top: 15px;
+
+            padding: 7px 11px;
+            border-radius: 7px;
+
+            background: rgba(255,255,255,0.2);
+            border: 1px dashed rgba(255,255,255,0.7);
+
+            font-size: 11px;
+            font-weight: 700;
+            width: fit-content;
+        }
+
+        .second .offer-code,
+        .third .offer-code {
+            background: white;
+            border-color: #ffc5a9;
+            color: #ff6b35;
+        }
+
+        .offer-icon {
+            position: absolute;
+            right: 22px;
+            bottom: 15px;
+            font-size: 65px;
+            opacity: 0.12;
+        }
+
+        /* ================= RESTAURANTS ================= */
+
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .restaurant-card {
+            background: white;
+            border: 1px solid #eee0d6;
+            border-radius: 17px;
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(53, 29, 15, 0.10);
+        }
+
+        .restaurant-image {
+            height: 205px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restaurant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .restaurant-card:hover .restaurant-image img {
+            transform: scale(1.05);
+        }
+
+        .discount {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+
+            background: #ff6b35;
+            color: white;
+
+            padding: 6px 10px;
+            border-radius: 7px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .delivery-badge {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+
+            background: white;
+            color: #2d1b12;
+
+            padding: 6px 10px;
+            border-radius: 7px;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .favorite {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+
+            border: none;
+            background: white;
+            color: #6e5b52;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .favorite.active {
+            color: #ff3f3f;
+        }
+
+        .restaurant-content {
+            padding: 18px;
+        }
+
+        .restaurant-name {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .restaurant-info {
+            color: #8a786e;
+            font-size: 11px;
+            margin-bottom: 13px;
+        }
+
+        .restaurant-meta {
+            padding-top: 13px;
+            border-top: 1px solid #f0e6df;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rating {
+            background: #198754;
+            color: white;
+
+            padding: 4px 7px;
+            border-radius: 6px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .delivery-time,
+        .cost {
+            color: #76645b;
+            font-size: 11px;
+        }
+
+        /* ================= QUICK DELIVERY ================= */
+
+        .quick-section {
+            background: #2d1b12;
+            color: white;
+            max-width: none;
+        }
+
+        .quick-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .quick-content h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .quick-content p {
+            color: #cdbdb4;
+            font-size: 13px;
+        }
+
+        .quick-items {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .quick-item {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+
+            padding: 15px 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 12px;
+        }
+
+        .quick-item i {
+            color: #ff8c61;
+        }
+
+        /* ================= DISHES ================= */
+
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .dish-card {
+            background: white;
+            border: 1px solid #eee1d8;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .dish-image {
+            height: 170px;
+            position: relative;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dish-favorite {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+            border: none;
+
+            background: white;
+            color: #777;
+
+            cursor: pointer;
+        }
+
+        .dish-content {
+            padding: 15px;
+        }
+
+        .dish-content h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .dish-content p {
+            color: #927f75;
+            font-size: 10px;
+            margin-bottom: 13px;
+        }
+
+        .dish-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #fff0e8;
+            color: #ff6b35;
+
+            padding: 7px 12px;
+            border-radius: 7px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* ================= WHY FRESHBITE ================= */
+
+        .why-section {
+            background: white;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 28px 20px;
+
+            border: 1px solid #eee3dc;
+            border-radius: 16px;
+        }
+
+        .why-icon {
+            width: 55px;
+            height: 55px;
+            margin: auto auto 14px;
+
+            background: #fff0e8;
+            color: #ff6b35;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .why-card h3 {
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .why-card p {
+            color: #8b786e;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= REVIEWS ================= */
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .review-card {
+            background: white;
+            border: 1px solid #eee1d8;
+            border-radius: 16px;
+            padding: 23px;
+        }
+
+        .stars {
+            color: #ffb300;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .review-text {
+            color: #68574e;
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 37px;
+            height: 37px;
+            border-radius: 50%;
+
+            background: #ffe5d7;
+            color: #ff6b35;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+            font-size: 12px;
+        }
+
+        .review-user strong {
+            font-size: 12px;
+            display: block;
+        }
+
+        .review-user small {
+            color: #96837a;
+            font-size: 9px;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            max-width: 1250px;
+            margin: 30px auto 70px;
+            padding: 0 25px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #ff6b35, #ff865c);
+            border-radius: 22px;
+
+            padding: 45px;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .cta-box h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .cta-box p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 12px 19px;
+            border-radius: 9px;
+
+            background: white;
+            color: #ff6b35;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .cta-button.dark {
+            background: #2d1b12;
+            color: white;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #21150f;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 25px 25px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 45px;
+        }
+
+        .footer-logo {
+            color: #ff6b35;
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 13px;
+        }
+
+        .footer-about {
+            color: #b7a79e;
+            font-size: 11px;
+            line-height: 1.8;
+            max-width: 310px;
+        }
+
+        .footer-column h3 {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #b7a79e;
+            font-size: 11px;
+            margin-bottom: 9px;
+        }
+
+        .footer-column a:hover {
+            color: #ff8a5b;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin-top: 40px;
+            padding-top: 20px;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #897970;
+            font-size: 10px;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translate(-50%, 100px);
+
+            background: #2d1b12;
+            color: white;
+
+            padding: 12px 18px;
+            border-radius: 10px;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            opacity: 0;
+            transition: 0.35s;
+
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description,
+            .search-box {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-highlights {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                min-height: 350px;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .offer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .offer-box.main {
+                grid-column: span 2;
+            }
+
+            .restaurant-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dish-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .nav-container {
+                height: auto;
+                padding-top: 13px;
+                padding-bottom: 13px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                overflow-x: auto;
+                padding-top: 4px;
+            }
+
+            .nav-actions {
+                margin-left: auto;
+            }
+
+            .login-btn {
+                padding: 9px 13px;
+            }
+
+            .hero-container {
+                padding-top: 45px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-image {
+                width: 290px;
+                height: 290px;
+            }
+
+            .rating-card {
+                left: 0;
+                top: 30px;
+            }
+
+            .offer-card {
+                right: 0;
+                bottom: 35px;
+            }
+
+            .section {
+                padding: 50px 18px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-title h2 {
+                font-size: 24px;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 9px;
+            }
+
+            .category-icon {
+                width: 53px;
+                height: 53px;
+                font-size: 23px;
+            }
+
+            .category-card {
+                padding: 12px 5px;
+            }
+
+            .category-card span {
+                font-size: 10px;
+            }
+
+            .offer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .offer-box.main {
+                grid-column: auto;
+            }
+
+            .restaurant-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dish-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .dish-image {
+                height: 145px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cta-box {
+                padding: 30px 23px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 7px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 37px;
+                height: 37px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .search-box {
+                min-height: 55px;
+            }
+
+            .search-button {
+                padding: 11px 13px;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .floating-card {
+                padding: 9px 11px;
+            }
+
+            .floating-card i {
+                width: 30px;
+                height: 30px;
+            }
+
+            .floating-card strong {
+                font-size: 10px;
+            }
+
+            .floating-card small {
+                font-size: 8px;
+            }
+
+            .dish-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-utensils"></i>
+            </span>
+            FreshBite
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html" class="active">Home</a>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+        <div class="nav-actions">
+
+            <a href="cart.html" class="cart-btn">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+
+            <a href="login.html" class="login-btn">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div>
+
+            <div class="location">
+                <i class="fa-solid fa-location-dot"></i>
+                Delivering to Bangalore
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <h1>
+                Delicious food,
+                <span>delivered fast.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover the best restaurants and dishes around you.
+                Order your favourites and enjoy fresh food at your doorstep.
+            </p>
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="homeSearch"
+                    placeholder="Search for restaurants, dishes or cuisines..."
+                >
+
+                <button
+                    class="search-button"
+                    onclick="performSearch()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+            <div class="popular-searches">
+                Popular:
+                <span onclick="quickSearch('Pizza')">Pizza</span> ·
+                <span onclick="quickSearch('Burger')">Burger</span> ·
+                <span onclick="quickSearch('Biryani')">Biryani</span> ·
+                <span onclick="quickSearch('Chicken')">Chicken</span>
+            </div>
+
+            <div class="hero-highlights">
+
+                <div class="highlight">
+                    <i class="fa-solid fa-bolt"></i>
+                    Fast Delivery
+                </div>
+
+                <div class="highlight">
+                    <i class="fa-solid fa-star"></i>
+                    Top Rated
+                </div>
+
+                <div class="highlight">
+                    <i class="fa-solid fa-tag"></i>
+                    Great Offers
+                </div>
+
+                <div class="highlight">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Secure Payment
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"
+                alt="Fresh Pizza"
+            >
+
+            <div class="floating-card rating-card">
+
+                <i class="fa-solid fa-star"></i>
+
+                <div>
+                    <strong>4.8 / 5</strong>
+                    <small>Customer rating</small>
+                </div>
+
+            </div>
+
+
+            <div class="floating-card offer-card">
+
+                <i class="fa-solid fa-percent"></i>
+
+                <div>
+                    <strong>Up to 50% OFF</strong>
+                    <small>Today's best offers</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h2>What are you craving?</h2>
+
+            <p>
+                Explore popular food categories
+            </p>
+
+        </div>
+
+        <a href="menu.html" class="view-all">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="category-grid">
+
+        <a href="menu.html?category=pizza" class="category-card">
+            <div class="category-icon">🍕</div>
+            <span>Pizza</span>
+        </a>
+
+        <a href="menu.html?category=burger" class="category-card">
+            <div class="category-icon">🍔</div>
+            <span>Burgers</span>
+        </a>
+
+        <a href="menu.html?category=pasta" class="category-card">
+            <div class="category-icon">🍝</div>
+            <span>Pasta</span>
+        </a>
+
+        <a href="menu.html?search=Chicken" class="category-card">
+            <div class="category-icon">🍗</div>
+            <span>Chicken</span>
+        </a>
+
+        <a href="menu.html?category=dessert" class="category-card">
+            <div class="category-icon">🍰</div>
+            <span>Desserts</span>
+        </a>
+
+        <a href="menu.html?category=drink" class="category-card">
+            <div class="category-icon">🥤</div>
+            <span>Drinks</span>
+        </a>
+
+        <a href="menu.html?category=starters" class="category-card">
+            <div class="category-icon">🥖</div>
+            <span>Starters</span>
+        </a>
+
+        <a href="restaurants.html" class="category-card">
+            <div class="category-icon">🍱</div>
+            <span>Combos</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OFFERS ================= -->
+
+<section class="offers-section">
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>Offers for you 🔥</h2>
+
+                <p>
+                    Save more on your favourite food
+                </p>
+
+            </div>
+
+            <a href="restaurants.html" class="view-all">
+                View restaurants →
+            </a>
+
+        </div>
+
+
+        <div class="offer-grid">
+
+            <div class="offer-box main">
+
+                <h3>
+                    Get 50% OFF
+                </h3>
+
+                <p>
+                    Enjoy delicious meals at amazing prices.
+                    Valid on selected restaurants.
+                </p>
+
+                <span class="offer-code">
+                    USE: FRESH50
+                </span>
+
+                <i class="fa-solid fa-percent offer-icon"></i>
+
+            </div>
+
+
+            <div class="offer-box second">
+
+                <h3>
+                    ₹150 OFF
+                </h3>
+
+                <p>
+                    Special offer for your first FreshBite order.
+                </p>
+
+                <span class="offer-code">
+                    FIRST150
+                </span>
+
+                <i class="fa-solid fa-gift offer-icon"></i>
+
+            </div>
+
+
+            <div class="offer-box third">
+
+                <h3>
+                    Free Delivery
+                </h3>
+
+                <p>
+                    Enjoy free delivery on selected restaurants.
+                </p>
+
+                <span class="offer-code">
+                    FREEDEL
+                </span>
+
+                <i class="fa-solid fa-motorcycle offer-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESTAURANTS ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h2>Top restaurants near you</h2>
+
+            <p>
+                Highly rated places loved by FreshBite customers
+            </p>
+
+        </div>
+
+        <a href="restaurants.html" class="view-all">
+            See all →
+        </a>
+
+    </div>
+
+
+    <div class="restaurant-grid">
+
+
+        <!-- RESTAURANT 1 -->
+
+        <a href="restaurants.html" class="restaurant-card">
+
+            <div class="restaurant-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80"
+                    alt="Urban Slice"
+                >
+
+                <span class="discount">
+                    40% OFF
+                </span>
+
+                <span class="delivery-badge">
+                    Free Delivery
+                </span>
+
+                <button
+                    class="favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="restaurant-content">
+
+                <div class="restaurant-name">
+                    Urban Slice
+                </div>
+
+                <div class="restaurant-info">
+                    Pizza · Italian · Fast Food
+                </div>
+
+                <div class="restaurant-meta">
+
+                    <span class="rating">
+                        ⭐ 4.7
+                    </span>
+
+                    <span class="delivery-time">
+                        <i class="fa-regular fa-clock"></i>
+                        25–30 min
+                    </span>
+
+                    <span class="cost">
+                        ₹₹ · 1.8 km
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- RESTAURANT 2 -->
+
+        <a href="restaurants.html" class="restaurant-card">
+
+            <div class="restaurant-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80"
+                    alt="Burger House"
+                >
+
+                <span class="discount">
+                    30% OFF
+                </span>
+
+                <span class="delivery-badge">
+                    30 min
+                </span>
+
+                <button
+                    class="favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="restaurant-content">
+
+                <div class="restaurant-name">
+                    Burger House
+                </div>
+
+                <div class="restaurant-info">
+                    Burgers · American · Fast Food
+                </div>
+
+                <div class="restaurant-meta">
+
+                    <span class="rating">
+                        ⭐ 4.6
+                    </span>
+
+                    <span class="delivery-time">
+                        <i class="fa-regular fa-clock"></i>
+                        25–35 min
+                    </span>
+
+                    <span class="cost">
+                        ₹₹ · 2.2 km
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- RESTAURANT 3 -->
+
+        <a href="restaurants.html" class="restaurant-card">
+
+            <div class="restaurant-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"
+                    alt="Spice Junction"
+                >
+
+                <span class="discount">
+                    25% OFF
+                </span>
+
+                <span class="delivery-badge">
+                    Free Delivery
+                </span>
+
+                <button
+                    class="favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="restaurant-content">
+
+                <div class="restaurant-name">
+                    Spice Junction
+                </div>
+
+                <div class="restaurant-info">
+                    Indian · Biryani · North Indian
+                </div>
+
+                <div class="restaurant-meta">
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <span class="delivery-time">
+                        <i class="fa-regular fa-clock"></i>
+                        30–35 min
+                    </span>
+
+                    <span class="cost">
+                        ₹₹ · 2.6 km
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUICK DELIVERY ================= -->
+
+<section class="quick-section">
+
+    <div class="quick-container">
+
+        <div class="quick-content">
+
+            <h2>
+                Hungry? We'll be there fast ⚡
+            </h2>
+
+            <p>
+                Fresh food, reliable delivery and easy ordering.
+            </p>
+
+        </div>
+
+
+        <div class="quick-items">
+
+            <div class="quick-item">
+                <i class="fa-solid fa-bolt"></i>
+                Under 30 min
+            </div>
+
+            <div class="quick-item">
+                <i class="fa-solid fa-location-dot"></i>
+                Live Tracking
+            </div>
+
+            <div class="quick-item">
+                <i class="fa-solid fa-credit-card"></i>
+                Secure Payment
+            </div>
+
+            <div class="quick-item">
+                <i class="fa-solid fa-headset"></i>
+                Easy Support
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= POPULAR DISHES ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h2>Popular dishes</h2>
+
+            <p>
+                Customer favourites you should try
+            </p>
+
+        </div>
+
+        <a href="menu.html" class="view-all">
+            Explore menu →
+        </a>
+
+    </div>
+
+
+    <div class="dish-grid">
+
+
+        <!-- DISH 1 -->
+
+        <div class="dish-card">
+
+            <div class="dish-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80"
+                    alt="Margherita Pizza"
+                >
+
+                <button
+                    class="dish-favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="dish-content">
+
+                <h3>
+                    Margherita Pizza
+                </h3>
+
+                <p>
+                    Fresh mozzarella · Tomato · Basil
+                </p>
+
+                <div class="dish-bottom">
+
+                    <span class="price">
+                        ₹249
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addFood('Margherita Pizza',249)"
+                    >
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISH 2 -->
+
+        <div class="dish-card">
+
+            <div class="dish-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                    alt="Chicken Burger"
+                >
+
+                <button
+                    class="dish-favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="dish-content">
+
+                <h3>
+                    Crispy Chicken Burger
+                </h3>
+
+                <p>
+                    Crispy chicken · Cheese · Fresh veggies
+                </p>
+
+                <div class="dish-bottom">
+
+                    <span class="price">
+                        ₹249
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addFood('Crispy Chicken Burger',249)"
+                    >
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISH 3 -->
+
+        <div class="dish-card">
+
+            <div class="dish-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80"
+                    alt="Alfredo Pasta"
+                >
+
+                <button
+                    class="dish-favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="dish-content">
+
+                <h3>
+                    Creamy Alfredo Pasta
+                </h3>
+
+                <p>
+                    Creamy sauce · Herbs · Parmesan
+                </p>
+
+                <div class="dish-bottom">
+
+                    <span class="price">
+                        ₹279
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addFood('Creamy Alfredo Pasta',279)"
+                    >
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISH 4 -->
+
+        <div class="dish-card">
+
+            <div class="dish-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80"
+                    alt="Cheesecake"
+                >
+
+                <button
+                    class="dish-favorite"
+                    onclick="toggleFavorite(event,this)"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+            </div>
+
+
+            <div class="dish-content">
+
+                <h3>
+                    New York Cheesecake
+                </h3>
+
+                <p>
+                    Cream cheese · Biscuit base · Berry
+                </p>
+
+                <div class="dish-bottom">
+
+                    <span class="price">
+                        ₹189
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addFood('New York Cheesecake',189)"
+                    >
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY FRESHBITE ================= -->
+
+<section class="why-section">
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>Why choose FreshBite?</h2>
+
+                <p>
+                    Everything you need for a better food-ordering experience
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-grid">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Get your favourite meals delivered quickly and reliably.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <h3>
+                    Trusted Ratings
+                </h3>
+
+                <p>
+                    Discover restaurants based on ratings and customer reviews.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+
+                <h3>
+                    Great Offers
+                </h3>
+
+                <p>
+                    Save money with exciting discounts and special coupons.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <h3>
+                    Secure Ordering
+                </h3>
+
+                <p>
+                    Enjoy simple and secure payment options for every order.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REVIEWS ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h2>What our customers say</h2>
+
+            <p>
+                Real experiences from FreshBite customers
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="reviews-grid">
+
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                “The food arrived fresh and hot. The ordering process
+                was very simple and delivery was faster than expected.”
+            </p>
+
+            <div class="review-user">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>
+                        Ananya
+                    </strong>
+
+                    <small>
+                        Bangalore
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                “I loved the restaurant choices and offers.
+                FreshBite makes it really easy to find good food nearby.”
+            </p>
+
+            <div class="review-user">
+
+                <div class="avatar">
+                    R
+                </div>
+
+                <div>
+                    <strong>
+                        Rahul
+                    </strong>
+
+                    <small>
+                        Bangalore
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="review-card">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                “The interface is clean and easy to use.
+                I especially liked the quick search and food categories.”
+            </p>
+
+            <div class="review-user">
+
+                <div class="avatar">
+                    P
+                </div>
+
+                <div>
+                    <strong>
+                        Priya
+                    </strong>
+
+                    <small>
+                        Bangalore
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<div class="cta">
+
+    <div class="cta-box">
+
+        <div>
+
+            <h2>
+                Ready to order? 🍽️
+            </h2>
+
+            <p>
+                Find your favourite restaurant and enjoy delicious food today.
+            </p>
+
+        </div>
+
+
+        <div class="cta-buttons">
+
+            <a
+                href="restaurants.html"
+                class="cta-button"
+            >
+                Browse Restaurants
+            </a>
+
+            <a
+                href="menu.html"
+                class="cta-button dark"
+            >
+                Explore Menu
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-top">
+
+            <div>
+
+                <div class="footer-logo">
+                    FreshBite
+                </div>
+
+                <p class="footer-about">
+                    Your simple and reliable food ordering experience.
+                    Discover great restaurants, delicious dishes and
+                    exciting offers near you.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Explore
+                </h3>
+
+                <a href="restaurants.html">
+                    Restaurants
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+                <a href="order-tracking.html">
+                    Track Order
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="contact.html">
+                    Contact Us
+                </a>
+
+                <a href="#">
+                    Careers
+                </a>
+
+                <a href="#">
+                    Offers
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Help
+                </h3>
+
+                <a href="#">
+                    FAQs
+                </a>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+                <a href="contact.html">
+                    Support
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 FreshBite. All rights reserved.
+            </span>
+
+            <span>
+                Made with ❤️ for food lovers
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /* ================= CART COUNT ================= */
+
+    function updateCartCount() {
+
+        let cart = JSON.parse(
+            localStorage.getItem("freshBiteCart")
+        ) || [];
+
+        let count = 0;
+
+        cart.forEach(item => {
+            count += Number(item.quantity) || 0;
+        });
+
+        const cartCount =
+            document.getElementById("cartCount");
+
+        if (cartCount) {
+            cartCount.textContent = count;
+        }
+    }
+
+
+    /* ================= ADD FOOD ================= */
+
+    function addFood(name, price) {
+
+        let cart = JSON.parse(
+            localStorage.getItem("freshBiteCart")
+        ) || [];
+
+        const existing =
+            cart.find(item => item.name === name);
+
+        if (existing) {
+
+            existing.quantity =
+                Number(existing.quantity || 0) + 1;
+
+        } else {
+
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1
+            });
+
+        }
+
+        localStorage.setItem(
+            "freshBiteCart",
+            JSON.stringify(cart)
+        );
+
+        updateCartCount();
+
+        showToast(
+            name + " added to cart 🛒"
+        );
+    }
+
+
+    /* ================= FAVORITE ================= */
+
+    function toggleFavorite(event, button) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        button.classList.toggle("active");
+
+        const icon =
+            button.querySelector("i");
+
+        if (button.classList.contains("active")) {
+
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+
+            showToast("Added to favourites ❤️");
+
+        } else {
+
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+
+            showToast("Removed from favourites");
+
+        }
+    }
+
+
+    /* ================= SEARCH ================= */
+
+    function performSearch() {
+
+        const input =
+            document.getElementById("homeSearch");
+
+        const search =
+            input.value.trim();
+
+        if (!search) {
+
+            showToast(
+                "Please enter something to search 🔎"
+            );
+
+            return;
+        }
+
+        window.location.href =
+            "menu.html?search=" +
+            encodeURIComponent(search);
+    }
+
+
+    function quickSearch(value) {
+
+        document.getElementById(
+            "homeSearch"
+        ).value = value;
+
+        performSearch();
+    }
+
+
+    /* ENTER KEY SEARCH */
+
+    document
+        .getElementById("homeSearch")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                performSearch();
+            }
+
+        });
+
+
+    /* ================= TOAST ================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        setTimeout(function() {
+
+            toast.classList.remove("show");
+
+        }, 2200);
+    }
+
+
+    /* ================= INITIALIZE ================= */
+
+    updateCartCount();
+
+</script>
+
+</body>
+</html>

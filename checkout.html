@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FreshBite - Checkout</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,.07);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d3c33;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .cart-link {
+            font-size: 20px;
+            color: #2d1b12;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .page-header {
+            background:
+                linear-gradient(
+                    120deg,
+                    #2d1b12,
+                    #4a2b1c
+                );
+
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .page-header p {
+            color: #ded2cb;
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1180px;
+            margin: auto;
+            padding: 35px 20px 70px;
+        }
+
+
+        /* =========================
+           CHECKOUT LAYOUT
+        ========================= */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 18px;
+            padding: 23px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title i {
+            color: #ff6b35;
+            font-size: 17px;
+        }
+
+        .card-title h2 {
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #4d3c33;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5d8d0;
+            border-radius: 8px;
+            outline: none;
+            font-size: 11px;
+            background: #fff;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #ff6b35;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+
+        /* =========================
+           ADDRESS TYPES
+        ========================= */
+
+        .address-types {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .address-type {
+            flex: 1;
+            border: 1px solid #e5d8d0;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .address-type i {
+            display: block;
+            margin-bottom: 5px;
+            color: #777;
+        }
+
+        .address-type.active {
+            border-color: #ff6b35;
+            background: #fff3ed;
+            color: #ff6b35;
+        }
+
+        .address-type.active i {
+            color: #ff6b35;
+        }
+
+
+        /* =========================
+           DELIVERY TIME
+        ========================= */
+
+        .delivery-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .delivery-option {
+            border: 1px solid #e5d8d0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .delivery-option:hover {
+            border-color: #ff6b35;
+        }
+
+        .delivery-option.active {
+            border: 2px solid #ff6b35;
+            background: #fff7f2;
+        }
+
+        .delivery-option input {
+            width: auto;
+            margin-right: 7px;
+        }
+
+        .delivery-option strong {
+            font-size: 11px;
+        }
+
+        .delivery-option small {
+            display: block;
+            color: #888;
+            font-size: 9px;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        .payment-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .payment-option {
+            border: 1px solid #e5d8d0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .payment-option:hover {
+            border-color: #ff6b35;
+        }
+
+        .payment-option.active {
+            border: 2px solid #ff6b35;
+            background: #fff7f2;
+        }
+
+        .payment-radio {
+            width: 17px;
+            height: 17px;
+            accent-color: #ff6b35;
+        }
+
+        .payment-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: #fff0e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff6b35;
+        }
+
+        .payment-info strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .payment-info span {
+            color: #888;
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           PAYMENT DETAILS
+        ========================= */
+
+        .payment-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #fffaf7;
+            border-radius: 10px;
+        }
+
+        .payment-details.show {
+            display: block;
+        }
+
+
+        /* =========================
+           ORDER SUMMARY
+        ========================= */
+
+        .summary-card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 18px;
+            padding: 23px;
+            position: sticky;
+            top: 95px;
+        }
+
+        .summary-card h2 {
+            font-size: 18px;
+            margin-bottom: 18px;
+        }
+
+        .summary-items {
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 1px solid #f1e9e4;
+        }
+
+        .summary-item img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        .summary-item-info {
+            flex: 1;
+        }
+
+        .summary-item-info strong {
+            display: block;
+            font-size: 10px;
+        }
+
+        .summary-item-info span {
+            font-size: 9px;
+            color: #888;
+        }
+
+        .summary-item-price {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .summary-row strong {
+            color: #2d1b12;
+        }
+
+        .discount {
+            color: #218c4d !important;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #eee5df;
+            margin: 17px 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           PLACE ORDER
+        ========================= */
+
+        .place-order {
+            width: 100%;
+            border: none;
+            background: #ff6b35;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .place-order:hover {
+            background: #e95726;
+            transform: translateY(-1px);
+        }
+
+        .place-order:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .secure {
+            text-align: center;
+            color: #888;
+            font-size: 9px;
+            margin-top: 12px;
+        }
+
+        .secure i {
+            color: #218c4d;
+        }
+
+
+        /* =========================
+           DELIVERY ADDRESS PREVIEW
+        ========================= */
+
+        .address-preview {
+            background: #f5fff8;
+            border: 1px solid #d8efdf;
+            border-radius: 10px;
+            padding: 13px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .address-preview i {
+            color: #218c4d;
+            margin-top: 3px;
+        }
+
+        .address-preview div {
+            font-size: 10px;
+            color: #555;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty-message {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .empty-message i {
+            font-size: 50px;
+            color: #ffb28e;
+            margin-bottom: 15px;
+        }
+
+        .empty-message h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .empty-message p {
+            color: #888;
+            font-size: 11px;
+            margin-bottom: 18px;
+        }
+
+        .back-menu {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #2d1b12;
+            color: white;
+            padding: 45px 7% 25px;
+        }
+
+        .footer-grid {
+            max-width: 1180px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand h2 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: #c8b9b0;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        footer h3 {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        footer li a {
+            color: #c8b9b0;
+            font-size: 9px;
+        }
+
+        footer li a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.1);
+            margin-top: 30px;
+            padding-top: 18px;
+            text-align: center;
+            color: #9f9088;
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #2d1b12;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 9px;
+            font-size: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: .3s;
+            z-index: 5000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:850px) {
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+        }
+
+
+        @media(max-width:650px) {
+
+            .navbar {
+                height: auto;
+                padding: 14px 5%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .delivery-options {
+                grid-template-columns: 1fr;
+            }
+
+            .address-types {
+                flex-wrap: wrap;
+            }
+
+            .address-type {
+                min-width: 30%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width:420px) {
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card,
+            .summary-card {
+                padding: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="index.html"
+           class="logo">
+
+            <i class="fa-solid fa-bowl-food"></i>
+
+            FreshBite
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <a href="cart.html"
+           class="cart-link">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- HEADER -->
+
+    <section class="page-header">
+
+        <h1>
+            Checkout
+        </h1>
+
+        <p>
+            Complete your order securely
+        </p>
+
+    </section>
+
+
+
+    <!-- EMPTY -->
+
+    <div
+        class="empty-message"
+        id="emptyMessage">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add some delicious food before checking out.
+        </p>
+
+        <a
+            href="menu.html"
+            class="back-menu">
+
+            Browse Menu
+
+        </a>
+
+    </div>
+
+
+
+    <!-- MAIN -->
+
+    <main
+        class="container"
+        id="checkoutContainer">
+
+
+        <div class="checkout-layout">
+
+
+            <!-- LEFT -->
+
+            <div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h2>
+                            Delivery Address
+                        </h2>
+
+                    </div>
+
+
+                    <div class="address-types">
+
+                        <button
+                            type="button"
+                            class="address-type active"
+                            onclick="selectAddressType(this)">
+
+                            <i class="fa-solid fa-house"></i>
+
+                            Home
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="address-type"
+                            onclick="selectAddressType(this)">
+
+                            <i class="fa-solid fa-building"></i>
+
+                            Work
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="address-type"
+                            onclick="selectAddressType(this)">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Other
+
+                        </button>
+
+                    </div>
+
+
+                    <form id="checkoutForm">
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Full Name *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    placeholder="Enter your name"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Phone Number *
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    placeholder="10-digit mobile number"
+                                    maxlength="10"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Complete Address *
+                                </label>
+
+                                <textarea
+                                    id="address"
+                                    placeholder="House no., street, area..."
+                                    required></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    City *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    value="Bangalore"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Pincode *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="pincode"
+                                    maxlength="6"
+                                    placeholder="6-digit pincode"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Delivery Instructions
+                                    <span style="color:#999;">
+                                        (Optional)
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="instructions"
+                                    placeholder="e.g. Leave at the door">
+
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- DELIVERY -->
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <h2>
+                            Delivery Time
+                        </h2>
+
+                    </div>
+
+
+                    <div class="delivery-options">
+
+
+                        <label
+                            class="delivery-option active">
+
+                            <input
+                                type="radio"
+                                name="deliveryTime"
+                                value="ASAP"
+                                checked>
+
+                            <strong>
+                                Deliver ASAP
+                            </strong>
+
+                            <small>
+                                25–35 minutes
+                            </small>
+
+                        </label>
+
+
+                        <label
+                            class="delivery-option">
+
+                            <input
+                                type="radio"
+                                name="deliveryTime"
+                                value="Later">
+
+                            <strong>
+                                Schedule for later
+                            </strong>
+
+                            <small>
+                                Choose your preferred time
+                            </small>
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAYMENT -->
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                        <h2>
+                            Payment Method
+                        </h2>
+
+                    </div>
+
+
+                    <div class="payment-options">
+
+
+                        <!-- UPI -->
+
+                        <label
+                            class="payment-option active"
+                            onclick="selectPayment(this,'upi')">
+
+                            <input
+                                class="payment-radio"
+                                type="radio"
+                                name="payment"
+                                value="UPI"
+                                checked>
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <strong>
+                                    UPI
+                                </strong>
+
+                                <span>
+                                    Google Pay, PhonePe, Paytm etc.
+                                </span>
+
+                            </div>
+
+                        </label>
+
+
+                        <!-- CARD -->
+
+                        <label
+                            class="payment-option"
+                            onclick="selectPayment(this,'card')">
+
+                            <input
+                                class="payment-radio"
+                                type="radio"
+                                name="payment"
+                                value="Card">
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-credit-card"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <strong>
+                                    Credit / Debit Card
+                                </strong>
+
+                                <span>
+                                    Visa, Mastercard, RuPay
+                                </span>
+
+                            </div>
+
+                        </label>
+
+
+                        <!-- COD -->
+
+                        <label
+                            class="payment-option"
+                            onclick="selectPayment(this,'cod')">
+
+                            <input
+                                class="payment-radio"
+                                type="radio"
+                                name="payment"
+                                value="Cash on Delivery">
+
+                            <div class="payment-icon">
+
+                                <i class="fa-solid fa-money-bill-wave"></i>
+
+                            </div>
+
+                            <div class="payment-info">
+
+                                <strong>
+                                    Cash on Delivery
+                                </strong>
+
+                                <span>
+                                    Pay when your order arrives
+                                </span>
+
+                            </div>
+
+                        </label>
+
+
+                    </div>
+
+
+                    <!-- UPI DETAILS -->
+
+                    <div
+                        id="upiDetails"
+                        class="payment-details show">
+
+                        <label>
+                            UPI ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="upiId"
+                            placeholder="example@upi">
+
+                    </div>
+
+
+                    <!-- CARD DETAILS -->
+
+                    <div
+                        id="cardDetails"
+                        class="payment-details">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Card Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="cardNumber"
+                                    placeholder="XXXX XXXX XXXX XXXX"
+                                    maxlength="19">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Name on Card
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="cardName"
+                                    placeholder="Your name">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Expiry
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="cardExpiry"
+                                    placeholder="MM/YY"
+                                    maxlength="5">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    CVV
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="cardCvv"
+                                    placeholder="CVV"
+                                    maxlength="3">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="codDetails"
+                        class="payment-details">
+
+                        <p style="
+                            font-size:10px;
+                            color:#777;
+                        ">
+
+                            You can pay in cash when your
+                            FreshBite order is delivered.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div>
+
+
+                <div class="summary-card">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+                    <div
+                        class="summary-items"
+                        id="summaryItems">
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Item Total
+                        </span>
+
+                        <strong id="subtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Fee
+                        </span>
+
+                        <strong id="deliveryFee">
+                            ₹40
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Taxes & Charges
+                        </span>
+
+                        <strong id="tax">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Coupon Discount
+                        </span>
+
+                        <strong
+                            class="discount"
+                            id="discount">
+
+                            - ₹0
+
+                        </strong>
+
+                    </div>
+
+
+                    <hr class="divider">
+
+
+                    <div class="total-row">
+
+                        <span>
+                            To Pay
+                        </span>
+
+                        <span id="total">
+                            ₹0
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="place-order"
+                        id="placeOrderButton"
+                        onclick="placeOrder()">
+
+                        Place Order
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <div class="secure">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your payment information is secure
+
+                    </div>
+
+                </div>
+
+
+                <div class="address-preview">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <div>
+
+                        <strong>
+                            Fresh & Fast Delivery
+                        </strong>
+
+                        <br>
+
+                        Your food will be prepared fresh
+                        and delivered to your doorstep.
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        <span id="toastMessage">
+            Done
+        </span>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <h2>
+
+                    <i class="fa-solid fa-bowl-food"></i>
+
+                    FreshBite
+
+                </h2>
+
+                <p>
+
+                    Delicious food from your favourite
+                    restaurants, delivered quickly to
+                    your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="restaurants.html">
+                            Restaurants
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="menu.html">
+                            Menu
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Follow Us
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Facebook
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 FreshBite. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        /* =========================
+           CART
+        ========================= */
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "freshBiteCart"
+                )
+            ) || [];
+
+
+        /* =========================
+           COUPON
+        ========================= */
+
+        const savedDiscount =
+            JSON.parse(
+                localStorage.getItem(
+                    "freshBiteDiscount"
+                )
+            ) || {
+                coupon: "",
+                amount: 0
+            };
+
+
+        let coupon =
+            savedDiscount.coupon || "";
+
+
+        let discount =
+            Number(
+                savedDiscount.amount
+            ) || 0;
+
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        let selectedPayment =
+            "UPI";
+
+
+        /* =========================
+           SHOW CART
+        ========================= */
+
+        function loadCheckout() {
+
+            if (cart.length === 0) {
+
+                document.getElementById(
+                    "checkoutContainer"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "emptyMessage"
+                ).style.display = "block";
+
+                return;
+
+            }
+
+
+            renderSummary();
+
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        function renderSummary() {
+
+            const summary =
+                document.getElementById(
+                    "summaryItems"
+                );
+
+
+            summary.innerHTML = "";
+
+
+            let subtotal =
+                0;
+
+
+            cart.forEach(item => {
+
+                const quantity =
+                    Number(item.quantity) || 1;
+
+
+                const price =
+                    Number(item.price) ||
+                    0;
+
+
+                const itemTotal =
+                    price * quantity;
+
+
+                subtotal += itemTotal;
+
+
+                summary.innerHTML += `
+
+                    <div class="summary-item">
+
+                        <img
+                            src="${item.image}"
+                            alt="${item.name}">
+
+                        <div class="summary-item-info">
+
+                            <strong>
+                                ${item.name}
+                            </strong>
+
+                            <span>
+                                ${quantity} × ₹${price}
+                            </span>
+
+                        </div>
+
+                        <div class="summary-item-price">
+
+                            ₹${itemTotal}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            const deliveryFee =
+                subtotal >= 299
+                    ? 0
+                    : 40;
+
+
+            const tax =
+                Math.round(
+                    subtotal * 0.05
+                );
+
+
+            if (
+                coupon === "FRESH50"
+            ) {
+
+                discount =
+                    Math.min(
+                        50,
+                        subtotal
+                    );
+
+            }
+            else if (
+                coupon === "WELCOME100"
+            ) {
+
+                discount =
+                    Math.min(
+                        100,
+                        subtotal
+                    );
+
+            }
+            else {
+
+                discount = 0;
+
+            }
+
+
+            const total =
+                subtotal +
+                deliveryFee +
+                tax -
+                discount;
+
+
+            document.getElementById(
+                "subtotal"
+            ).textContent =
+                "₹" + subtotal;
+
+
+            document.getElementById(
+                "deliveryFee"
+            ).textContent =
+                deliveryFee === 0
+                    ? "FREE"
+                    : "₹" + deliveryFee;
+
+
+            document.getElementById(
+                "tax"
+            ).textContent =
+                "₹" + tax;
+
+
+            document.getElementById(
+                "discount"
+            ).textContent =
+                "- ₹" + discount;
+
+
+            document.getElementById(
+                "total"
+            ).textContent =
+                "₹" +
+                Math.max(
+                    0,
+                    total
+                );
+
+        }
+
+
+        /* =========================
+           ADDRESS TYPE
+        ========================= */
+
+        function selectAddressType(button) {
+
+            document
+                .querySelectorAll(
+                    ".address-type"
+                )
+                .forEach(btn => {
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        function selectPayment(
+            element,
+            type
+        ) {
+
+            document
+                .querySelectorAll(
+                    ".payment-option"
+                )
+                .forEach(option => {
+
+                    option.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+            element.classList.add(
+                "active"
+            );
+
+
+            selectedPayment =
+                type === "upi"
+                    ? "UPI"
+                    : type === "card"
+                        ? "Card"
+                        : "Cash on Delivery";
+
+
+            document
+                .getElementById(
+                    "upiDetails"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+
+            document
+                .getElementById(
+                    "cardDetails"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+
+            document
+                .getElementById(
+                    "codDetails"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+
+            if (type === "upi") {
+
+                document
+                    .getElementById(
+                        "upiDetails"
+                    )
+                    .classList.add(
+                        "show"
+                    );
+
+            }
+
+
+            if (type === "card") {
+
+                document
+                    .getElementById(
+                        "cardDetails"
+                    )
+                    .classList.add(
+                        "show"
+                    );
+
+            }
+
+
+            if (type === "cod") {
+
+                document
+                    .getElementById(
+                        "codDetails"
+                    )
+                    .classList.add(
+                        "show"
+                    );
+
+            }
+
+        }
+
+
+        /* =========================
+           DELIVERY OPTION
+        ========================= */
+
+        document
+            .querySelectorAll(
+                ".delivery-option"
+            )
+            .forEach(option => {
+
+                option.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".delivery-option"
+                            )
+                            .forEach(item => {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            });
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           PLACE ORDER
+        ========================= */
+
+        function placeOrder() {
+
+            const form =
+                document.getElementById(
+                    "checkoutForm"
+                );
+
+
+            if (!form.checkValidity()) {
+
+                form.reportValidity();
+
+                return;
+
+            }
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const pincode =
+                document.getElementById(
+                    "pincode"
+                ).value.trim();
+
+
+            if (
+                !/^[0-9]{10}$/.test(phone)
+            ) {
+
+                showToast(
+                    "Enter a valid 10-digit phone number"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !/^[0-9]{6}$/.test(pincode)
+            ) {
+
+                showToast(
+                    "Enter a valid 6-digit pincode"
+                );
+
+                return;
+
+            }
+
+
+            /* UPI validation */
+
+            if (
+                selectedPayment === "UPI"
+            ) {
+
+                const upi =
+                    document.getElementById(
+                        "upiId"
+                    ).value.trim();
+
+
+                if (!upi.includes("@")) {
+
+                    showToast(
+                        "Enter a valid UPI ID"
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            /* Card validation */
+
+            if (
+                selectedPayment === "Card"
+            ) {
+
+                const card =
+                    document.getElementById(
+                        "cardNumber"
+                    ).value
+                    .replace(/\s/g,"");
+
+
+                const cvv =
+                    document.getElementById(
+                        "cardCvv"
+                    ).value.trim();
+
+
+                if (
+                    card.length < 12
+                ) {
+
+                    showToast(
+                        "Enter a valid card number"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    cvv.length !== 3
+                ) {
+
+                    showToast(
+                        "Enter a valid CVV"
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            let subtotal =
+                0;
+
+
+            cart.forEach(item => {
+
+                subtotal +=
+                    Number(item.price) *
+                    (Number(item.quantity) || 1);
+
+            });
+
+
+            const deliveryFee =
+                subtotal >= 299
+                    ? 0
+                    : 40;
+
+
+            const tax =
+                Math.round(
+                    subtotal * 0.05
+                );
+
+
+            let finalDiscount =
+                0;
+
+
+            if (
+                coupon === "FRESH50"
+            ) {
+
+                finalDiscount =
+                    Math.min(
+                        50,
+                        subtotal
+                    );
+
+            }
+
+
+            if (
+                coupon === "WELCOME100"
+            ) {
+
+                finalDiscount =
+                    Math.min(
+                        100,
+                        subtotal
+                    );
+
+            }
+
+
+            const total =
+                Math.max(
+                    0,
+                    subtotal +
+                    deliveryFee +
+                    tax -
+                    finalDiscount
+                );
+
+
+            const deliveryTime =
+                document.querySelector(
+                    'input[name="deliveryTime"]:checked'
+                ).value;
+
+
+            const addressType =
+                document.querySelector(
+                    ".address-type.active"
+                ).innerText.trim();
+
+
+            /* =========================
+               CREATE ORDER
+            ========================= */
+
+            const order = {
+
+                orderId:
+                    "FB" +
+                    Date.now()
+                        .toString()
+                        .slice(-8),
+
+                date:
+                    new Date()
+                        .toLocaleString(
+                            "en-IN"
+                        ),
+
+                customer: {
+
+                    name:
+                        document.getElementById(
+                            "fullName"
+                        ).value.trim(),
+
+                    phone:
+                        phone,
+
+                    address:
+                        document.getElementById(
+                            "address"
+                        ).value.trim(),
+
+                    city:
+                        document.getElementById(
+                            "city"
+                        ).value.trim(),
+
+                    pincode:
+                        pincode,
+
+                    instructions:
+                        document.getElementById(
+                            "instructions"
+                        ).value.trim(),
+
+                    type:
+                        addressType
+
+                },
+
+                items:
+                    cart,
+
+                payment:
+                    selectedPayment,
+
+                deliveryTime:
+                    deliveryTime,
+
+                coupon:
+                    coupon,
+
+                subtotal:
+                    subtotal,
+
+                deliveryFee:
+                    deliveryFee,
+
+                tax:
+                    tax,
+
+                discount:
+                    finalDiscount,
+
+                total:
+                    total,
+
+                status:
+                    "Order Confirmed"
+
+            };
+
+
+            localStorage.setItem(
+                "freshBiteOrder",
+                JSON.stringify(order)
+            );
+
+
+            /* Clear cart */
+
+            localStorage.removeItem(
+                "freshBiteCart"
+            );
+
+
+            localStorage.removeItem(
+                "freshBiteDiscount"
+            );
+
+
+            showToast(
+                "Order placed successfully!"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "order-tracking.html";
+
+            },1000);
+
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            document.getElementById(
+                "toastMessage"
+            ).textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },2500);
+
+        }
+
+
+        /* =========================
+           LOAD
+        ========================= */
+
+        loadCheckout();
+
+    </script>
+
+</body>
+
+</html>

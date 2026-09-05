@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>About Us | FreshBite</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff8f0;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(45, 27, 18, 0.08);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo i {
+            margin-right: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #4d382e;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -13px;
+            right: -14px;
+            width: 18px;
+            height: 18px;
+            background: #ff6b35;
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-btn {
+            background: #ff6b35;
+            color: #ffffff !important;
+            padding: 9px 18px;
+            border-radius: 22px;
+        }
+
+        .account-btn:hover {
+            background: #e95520;
+            color: #ffffff !important;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 440px;
+            padding: 70px 8%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 50px;
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255,255,255,0.22),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #ff6b35,
+                    #ff8c42
+                );
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero-content h1 span {
+            color: #fff3e8;
+        }
+
+        .hero-content p {
+            max-width: 600px;
+            line-height: 1.8;
+            font-size: 15px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #ffffff;
+            color: #ff6b35;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            border: 1px solid rgba(255,255,255,0.7);
+            color: #ffffff;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 470px;
+            height: 310px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(45,27,18,0.2);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: #ffffff;
+            color: #2d1b12;
+            padding: 14px 18px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(45,27,18,0.18);
+            font-size: 12px;
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 17px;
+            color: #ff6b35;
+        }
+
+        .card-one {
+            left: -25px;
+            bottom: 25px;
+        }
+
+        .card-two {
+            right: -15px;
+            top: 25px;
+        }
+
+        /* ================= COMMON ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1180px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 13px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        /* ================= STORY ================= */
+
+        .story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            border-radius: 22px;
+        }
+
+        .story-content h2 {
+            font-size: 31px;
+            margin-bottom: 18px;
+        }
+
+        .story-content h2 span {
+            color: #ff6b35;
+        }
+
+        .story-content p {
+            color: #6f625c;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+        .story-points {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .story-point {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .story-point i {
+            width: 30px;
+            height: 30px;
+            background: #fff0e9;
+            color: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats-section {
+            background: #ffffff;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px 15px;
+            border-radius: 18px;
+            background: #fff8f0;
+        }
+
+        .stat-card i {
+            color: #ff6b35;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+            margin-bottom: 3px;
+        }
+
+        .stat-card p {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* ================= MISSION ================= */
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .mission-card {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 7px 25px rgba(45,27,18,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #fff0e9;
+            right: -35px;
+            top: -35px;
+        }
+
+        .mission-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: #fff0e9;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .mission-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* ================= WHY US ================= */
+
+        .why-section {
+            background: #ffffff;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 28px 18px;
+            border: 1px solid #eee;
+            border-radius: 18px;
+            transition: 0.3s;
+            background: #ffffff;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(45,27,18,0.08);
+        }
+
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            margin: auto auto 18px;
+            border-radius: 50%;
+            background: #fff0e9;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .why-card h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            color: #888;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+            background: #ff6b35;
+            color: #ffffff;
+            border-radius: 50%;
+            margin: auto auto 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .step p {
+            color: #888;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin-bottom: 75px;
+            padding: 55px 40px;
+            border-radius: 25px;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                #ff6b35,
+                #ff8c42
+            );
+            color: #ffffff;
+        }
+
+        .cta h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 23px;
+        }
+
+        .cta a {
+            display: inline-block;
+            background: #ffffff;
+            color: #ff6b35;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #2d1b12;
+            color: #ffffff;
+            padding: 40px 6%;
+            text-align: center;
+        }
+
+        footer .logo {
+            color: #ff8c62;
+        }
+
+        footer p {
+            color: #c7b9b1;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            color: #d7cbc5;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                max-width: 500px;
+                margin: auto;
+            }
+
+            .stats,
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .nav-links a:not(.cart-link):not(.account-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding: 55px 6%;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .story,
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image img {
+                height: 300px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .stats,
+            .why-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 31px;
+            }
+
+            .hero-image img {
+                height: 250px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .story-content h2 {
+                font-size: 26px;
+            }
+
+            .story-points {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 40px 20px;
+            }
+
+            .cta h2 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        <i class="fa-solid fa-bowl-food"></i>
+        FreshBite
+    </a>
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="restaurants.html">
+            Restaurants
+        </a>
+
+        <a href="menu.html">
+            Menu
+        </a>
+
+        <a href="about.html" class="active">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="cart.html" class="cart-link">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
+        </a>
+
+        <a
+            href="account.html"
+            class="account-btn"
+        >
+            <i class="fa-solid fa-user"></i>
+            Account
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Good Food.
+            <br>
+            <span>Good Mood.</span>
+        </h1>
+
+        <p>
+            FreshBite is your simple and reliable way to
+            discover great food, order from your favorite
+            restaurants and enjoy delicious meals delivered
+            right to your doorstep.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="restaurants.html"
+                class="hero-btn primary-btn"
+            >
+                Explore Restaurants
+            </a>
+
+            <a
+                href="menu.html"
+                class="hero-btn secondary-btn"
+            >
+                View Menu
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
+            alt="Fresh food"
+        >
+
+        <div class="floating-card card-one">
+
+            <strong>25–35 min</strong>
+
+            Fast Delivery
+
+        </div>
+
+        <div class="floating-card card-two">
+
+            <strong>4.8 ★</strong>
+
+            Loved by Customers
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OUR STORY ================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="story">
+
+            <div class="story-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80"
+                    alt="Restaurant"
+                >
+
+            </div>
+
+
+            <div class="story-content">
+
+                <h2>
+                    About <span>FreshBite</span>
+                </h2>
+
+                <p>
+                    FreshBite was created with one simple idea:
+                    ordering food online should be convenient,
+                    enjoyable and stress-free.
+                </p>
+
+                <p>
+                    We bring restaurants and food lovers
+                    together through an easy-to-use platform
+                    where you can discover dishes, compare
+                    restaurants, place orders and track your
+                    delivery.
+                </p>
+
+                <p>
+                    From a quick lunch to a special dinner,
+                    FreshBite helps you find something delicious
+                    whenever you are hungry.
+                </p>
+
+
+                <div class="story-points">
+
+                    <div class="story-point">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Quality Food
+
+                    </div>
+
+                    <div class="story-point">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Fast Delivery
+
+                    </div>
+
+                    <div class="story-point">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Easy Ordering
+
+                    </div>
+
+                    <div class="story-point">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Great Offers
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="section stats-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                FreshBite at a Glance
+            </h2>
+
+            <p>
+                Built around convenience, variety and a
+                better food ordering experience.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-store"></i>
+
+                <h3>500+</h3>
+
+                <p>
+                    Restaurant Partners
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-utensils"></i>
+
+                <h3>10K+</h3>
+
+                <p>
+                    Food Choices
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-face-smile"></i>
+
+                <h3>50K+</h3>
+
+                <p>
+                    Happy Customers
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+                <h3>30 min</h3>
+
+                <p>
+                    Average Delivery
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MISSION ================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Our Mission & Vision
+            </h2>
+
+            <p>
+                We want food ordering to feel simple,
+                transparent and enjoyable for everyone.
+            </p>
+
+        </div>
+
+
+        <div class="mission-grid">
+
+            <div class="mission-card">
+
+                <div class="mission-icon">
+
+                    <i class="fa-solid fa-bullseye"></i>
+
+                </div>
+
+                <h3>
+                    Our Mission
+                </h3>
+
+                <p>
+                    To make delicious food accessible with
+                    an easy ordering experience, reliable
+                    delivery information and a wide variety
+                    of restaurants and dishes.
+                </p>
+
+            </div>
+
+
+            <div class="mission-card">
+
+                <div class="mission-icon">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </div>
+
+                <h3>
+                    Our Vision
+                </h3>
+
+                <p>
+                    To build a trusted food platform where
+                    customers can discover great food and
+                    restaurants can connect with more people.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY FRESHBITE ================= -->
+
+<section class="section why-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Why Choose FreshBite?
+            </h2>
+
+            <p>
+                Everything you need for a smooth food ordering
+                experience.
+            </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+            <div class="why-card">
+
+                <div class="why-icon">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                </div>
+
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Get your favorite meals delivered quickly
+                    and conveniently.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+                <h3>
+                    Trusted Ratings
+                </h3>
+
+                <p>
+                    Discover restaurants using ratings and
+                    useful food information.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                </div>
+
+                <h3>
+                    Great Offers
+                </h3>
+
+                <p>
+                    Enjoy discounts, deals and offers on
+                    selected restaurants and dishes.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <h3>
+                    Secure Ordering
+                </h3>
+
+                <p>
+                    Simple checkout with multiple payment
+                    options for your convenience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                How FreshBite Works
+            </h2>
+
+            <p>
+                Ordering your favorite food takes only a few
+                simple steps.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Find a Restaurant
+                </h3>
+
+                <p>
+                    Search restaurants, cuisines or dishes
+                    you love.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Choose Your Food
+                </h3>
+
+                <p>
+                    Browse the menu and select your favorite
+                    dishes.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Place Your Order
+                </h3>
+
+                <p>
+                    Add your address and choose your preferred
+                    payment method.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    4
+                </div>
+
+                <h3>
+                    Enjoy Your Meal
+                </h3>
+
+                <p>
+                    Track your order and enjoy your food at
+                    your doorstep.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<div class="container">
+
+    <section class="cta">
+
+        <h2>
+            Hungry? Let's Fix That.
+        </h2>
+
+        <p>
+            Explore amazing restaurants and discover your
+            next favorite meal.
+        </p>
+
+        <a href="restaurants.html">
+            Start Ordering
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </section>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+
+        <i class="fa-solid fa-bowl-food"></i>
+
+        FreshBite
+
+    </div>
+
+    <p>
+        Delicious food. Fast delivery. Happy moments.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="restaurants.html">
+            Restaurants
+        </a>
+
+        <a href="menu.html">
+            Menu
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </div>
+
+
+    <p>
+        © 2026 FreshBite. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function updateCartCount() {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("freshBiteCart")
+            ) || [];
+
+        const count =
+            cart.reduce(
+                (total, item) =>
+                    total + Number(item.quantity || 1),
+                0
+            );
+
+        document.getElementById(
+            "cartCount"
+        ).textContent = count;
+    }
+
+    updateCartCount();
+
+</script>
+
+
+</body>
+</html>

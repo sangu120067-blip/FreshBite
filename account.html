@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Account | FreshBite</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff8f0;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            box-shadow: 0 2px 15px rgba(45, 27, 18, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+
+        .logo i {
+            margin-right: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d382e;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -13px;
+            right: -14px;
+            background: #ff6b35;
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .login-btn {
+            background: #ff6b35;
+            color: white !important;
+            padding: 9px 18px;
+            border-radius: 22px;
+        }
+
+        .login-btn:hover {
+            background: #e95520 !important;
+            color: white !important;
+        }
+
+        /* ================= PAGE HEADER ================= */
+
+        .page-header {
+            background: linear-gradient(
+                135deg,
+                #ff6b35,
+                #ff8c42
+            );
+            color: white;
+            padding: 48px 6%;
+        }
+
+        .page-header h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: 35px auto 70px;
+        }
+
+        .account-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            background: white;
+            border-radius: 18px;
+            padding: 22px;
+            height: fit-content;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.06);
+        }
+
+        .profile-mini {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 18px;
+        }
+
+        .profile-avatar {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                #ff6b35,
+                #ff9b5e
+            );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: auto;
+        }
+
+        .profile-mini h3 {
+            margin-top: 12px;
+            font-size: 17px;
+        }
+
+        .profile-mini p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .side-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .side-menu button {
+            border: none;
+            background: transparent;
+            text-align: left;
+            padding: 13px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #59443a;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .side-menu button i {
+            width: 25px;
+        }
+
+        .side-menu button:hover,
+        .side-menu button.active {
+            background: #fff0e9;
+            color: #ff6b35;
+        }
+
+        .logout-btn {
+            color: #d32f2f !important;
+        }
+
+        .logout-btn:hover {
+            background: #fff0f0 !important;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            min-width: 0;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            margin-bottom: 18px;
+        }
+
+        .section-title h2 {
+            font-size: 24px;
+        }
+
+        .section-title p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* ================= DASHBOARD ================= */
+
+        .welcome-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .welcome-card h2 {
+            font-size: 23px;
+            margin-bottom: 6px;
+        }
+
+        .welcome-card p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .welcome-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            background: #fff0e9;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.06);
+        }
+
+        .stat-card i {
+            font-size: 22px;
+            color: #ff6b35;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h3 {
+            font-size: 22px;
+        }
+
+        .stat-card p {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* ================= ORDER CARD ================= */
+
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 14px;
+            margin-bottom: 14px;
+        }
+
+        .order-id {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .order-date {
+            font-size: 11px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e8f7ed;
+            color: #218838;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .order-items {
+            color: #555;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .order-bottom {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-total {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .view-order-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .form-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.06);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #5a4439;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .form-group input:focus {
+            border-color: #ff6b35;
+        }
+
+        .save-btn {
+            margin-top: 20px;
+            padding: 11px 22px;
+            border: none;
+            background: #ff6b35;
+            color: white;
+            border-radius: 22px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ================= ADDRESS ================= */
+
+        .address-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .address-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .address-card .address-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #fff0e9;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .address-card h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .address-card p {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        .add-address {
+            border: 2px dashed #ffb18f;
+            background: transparent;
+            color: #ff6b35;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+            cursor: pointer;
+        }
+
+        .add-address i {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        /* ================= WISHLIST ================= */
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .wishlist-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+        }
+
+        .wishlist-image {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .wishlist-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wishlist-info {
+            padding: 15px;
+        }
+
+        .wishlist-info h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .wishlist-info p {
+            color: #ff6b35;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .wishlist-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .wishlist-actions button {
+            flex: 1;
+            padding: 8px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .add-cart-btn {
+            border: none;
+            background: #ff6b35;
+            color: white;
+        }
+
+        .remove-btn {
+            border: 1px solid #ddd;
+            background: white;
+            color: #555;
+        }
+
+        /* ================= PAYMENT ================= */
+
+        .payment-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff0e9;
+            color: #ff6b35;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .payment-card h3 {
+            font-size: 14px;
+        }
+
+        .payment-card p {
+            font-size: 11px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        /* ================= SETTINGS ================= */
+
+        .setting-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-row h3 {
+            font-size: 13px;
+        }
+
+        .setting-row p {
+            color: #888;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            border-radius: 20px;
+            background: #ff6b35;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle::after {
+            content: "";
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-state {
+            background: white;
+            border-radius: 18px;
+            padding: 55px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(45, 27, 18, 0.05);
+        }
+
+        .empty-state i {
+            font-size: 45px;
+            color: #ffb18f;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .empty-state p {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 22px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #2d1b12;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: 0.3s;
+            z-index: 5000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #2d1b12;
+            color: white;
+            padding: 35px 6%;
+            text-align: center;
+        }
+
+        footer .logo {
+            color: #ff8c62;
+        }
+
+        footer p {
+            color: #c7b9b1;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #d7cbc5;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 14px;
+            }
+
+            .account-layout {
+                grid-template-columns: 220px 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-links a:not(.cart-link):not(.login-btn) {
+                display: none;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .account-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .side-menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid,
+            .address-grid,
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .welcome-card {
+                padding: 20px;
+            }
+
+            .welcome-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .side-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header {
+                padding: 35px 5%;
+            }
+
+            .container {
+                margin-top: 25px;
+            }
+
+            .order-top,
+            .order-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .toast {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        <i class="fa-solid fa-bowl-food"></i>
+        FreshBite
+    </a>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="restaurants.html">Restaurants</a>
+
+        <a href="menu.html">Menu</a>
+
+        <a href="about.html">About</a>
+
+        <a href="contact.html">Contact</a>
+
+        <a href="cart.html" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+
+        <a href="account.html" class="login-btn active">
+            <i class="fa-solid fa-user"></i>
+            Account
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<header class="page-header">
+
+    <h1>My Account</h1>
+
+    <p>
+        Manage your profile, orders, addresses and preferences
+    </p>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <div class="account-layout">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="profile-mini">
+
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <h3 id="sideUserName">
+                    FreshBite User
+                </h3>
+
+                <p id="sideUserEmail">
+                    Welcome back!
+                </p>
+
+            </div>
+
+
+            <div class="side-menu">
+
+                <button
+                    class="menu-btn active"
+                    data-section="dashboard"
+                >
+                    <i class="fa-solid fa-grid-2"></i>
+                    Overview
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="orders"
+                >
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    My Orders
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="profile"
+                >
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="addresses"
+                >
+                    <i class="fa-solid fa-location-dot"></i>
+                    Addresses
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="wishlist"
+                >
+                    <i class="fa-solid fa-heart"></i>
+                    Wishlist
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="payments"
+                >
+                    <i class="fa-solid fa-credit-card"></i>
+                    Payments
+                </button>
+
+                <button
+                    class="menu-btn"
+                    data-section="settings"
+                >
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </button>
+
+                <button
+                    class="menu-btn logout-btn"
+                    id="logoutBtn"
+                >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <div
+                class="section active"
+                id="dashboard"
+            >
+
+                <div class="welcome-card">
+
+                    <div>
+
+                        <h2>
+                            Welcome back, <span id="welcomeName">Food Lover</span> 👋
+                        </h2>
+
+                        <p>
+                            Ready to discover something delicious today?
+                        </p>
+
+                    </div>
+
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        <h3 id="orderCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Total Orders
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-heart"></i>
+
+                        <h3>
+                            4
+                        </h3>
+
+                        <p>
+                            Wishlist Items
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h3>
+                            2
+                        </h3>
+
+                        <p>
+                            Saved Addresses
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-title">
+
+                    <h2>
+                        Recent Order
+                    </h2>
+
+                    <p>
+                        Your latest FreshBite order
+                    </p>
+
+                </div>
+
+
+                <div id="recentOrder"></div>
+
+            </div>
+
+
+            <!-- ================= ORDERS ================= -->
+
+            <div
+                class="section"
+                id="orders"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        My Orders
+                    </h2>
+
+                    <p>
+                        Track and manage your previous orders
+                    </p>
+
+                </div>
+
+                <div id="ordersList"></div>
+
+            </div>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <div
+                class="section"
+                id="profile"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        Profile
+                    </h2>
+
+                    <p>
+                        Update your personal information
+                    </p>
+
+                </div>
+
+
+                <div class="form-card">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileName"
+                                placeholder="Enter your name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="profileEmail"
+                                placeholder="Enter your email"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="profilePhone"
+                                placeholder="Enter phone number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Date of Birth
+                            </label>
+
+                            <input
+                                type="date"
+                                id="profileDob"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="save-btn"
+                        onclick="saveProfile()"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ADDRESSES ================= -->
+
+            <div
+                class="section"
+                id="addresses"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        Saved Addresses
+                    </h2>
+
+                    <p>
+                        Manage your delivery locations
+                    </p>
+
+                </div>
+
+
+                <div class="address-grid">
+
+                    <div class="address-card">
+
+                        <div class="address-icon">
+                            <i class="fa-solid fa-house"></i>
+                        </div>
+
+                        <h3>
+                            Home
+                        </h3>
+
+                        <p>
+                            123, Green Avenue<br>
+                            Bangalore, Karnataka<br>
+                            560001
+                        </p>
+
+                    </div>
+
+
+                    <div class="address-card">
+
+                        <div class="address-icon">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+
+                        <h3>
+                            Work
+                        </h3>
+
+                        <p>
+                            45, Tech Park Road<br>
+                            Bangalore, Karnataka<br>
+                            560037
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="address-card add-address"
+                        onclick="showToast('Address feature ready for integration')"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        <strong>
+                            Add New Address
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= WISHLIST ================= -->
+
+            <div
+                class="section"
+                id="wishlist"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        My Wishlist
+                    </h2>
+
+                    <p>
+                        Your favorite dishes in one place
+                    </p>
+
+                </div>
+
+
+                <div class="wishlist-grid">
+
+                    <div class="wishlist-card">
+
+                        <div class="wishlist-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
+                                alt="Pizza"
+                            >
+
+                        </div>
+
+                        <div class="wishlist-info">
+
+                            <h3>
+                                Margherita Pizza
+                            </h3>
+
+                            <p>
+                                ₹249
+                            </p>
+
+                            <div class="wishlist-actions">
+
+                                <button
+                                    class="add-cart-btn"
+                                    onclick="addToCart('Margherita Pizza',249)"
+                                >
+                                    Add to Cart
+                                </button>
+
+                                <button
+                                    class="remove-btn"
+                                    onclick="showToast('Removed from wishlist')"
+                                >
+                                    <i class="fa-solid fa-heart-crack"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="wishlist-card">
+
+                        <div class="wishlist-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+                                alt="Burger"
+                            >
+
+                        </div>
+
+                        <div class="wishlist-info">
+
+                            <h3>
+                                Crispy Chicken Burger
+                            </h3>
+
+                            <p>
+                                ₹249
+                            </p>
+
+                            <div class="wishlist-actions">
+
+                                <button
+                                    class="add-cart-btn"
+                                    onclick="addToCart('Crispy Chicken Burger',249)"
+                                >
+                                    Add to Cart
+                                </button>
+
+                                <button
+                                    class="remove-btn"
+                                    onclick="showToast('Removed from wishlist')"
+                                >
+                                    <i class="fa-solid fa-heart-crack"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PAYMENTS ================= -->
+
+            <div
+                class="section"
+                id="payments"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        Payment Methods
+                    </h2>
+
+                    <p>
+                        Manage your preferred payment options
+                    </p>
+
+                </div>
+
+
+                <div class="payment-card">
+
+                    <div class="payment-icon">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            UPI Payment
+                        </h3>
+
+                        <p>
+                            Pay securely using UPI during checkout
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="payment-card">
+
+                    <div class="payment-icon">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Credit / Debit Card
+                        </h3>
+
+                        <p>
+                            Visa, Mastercard and other supported cards
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="payment-card">
+
+                    <div class="payment-icon">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+
+                    <div>
+                        <h3>
+                            Cash on Delivery
+                        </h3>
+
+                        <p>
+                            Available on eligible orders
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SETTINGS ================= -->
+
+            <div
+                class="section"
+                id="settings"
+            >
+
+                <div class="section-title">
+
+                    <h2>
+                        Settings
+                    </h2>
+
+                    <p>
+                        Control your FreshBite preferences
+                    </p>
+
+                </div>
+
+
+                <div class="setting-card">
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3>
+                                Order Notifications
+                            </h3>
+
+                            <p>
+                                Receive updates about your orders
+                            </p>
+
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3>
+                                Offers & Discounts
+                            </h3>
+
+                            <p>
+                                Get notified about exclusive offers
+                            </p>
+
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3>
+                                Personalized Recommendations
+                            </h3>
+
+                            <p>
+                                Show dishes based on your preferences
+                            </p>
+
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+        <i class="fa-solid fa-bowl-food"></i>
+        FreshBite
+    </div>
+
+    <p>
+        Delicious food. Fast delivery. Happy moments.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="restaurants.html">Restaurants</a>
+
+        <a href="menu.html">Menu</a>
+
+        <a href="about.html">About</a>
+
+        <a href="contact.html">Contact</a>
+
+    </div>
+
+    <p>
+        © 2026 FreshBite. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+    /* ================= CART COUNT ================= */
+
+    function updateCartCount() {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("freshBiteCart")
+            ) || [];
+
+        const count =
+            cart.reduce(
+                (total, item) =>
+                    total + Number(item.quantity || 1),
+                0
+            );
+
+        document.getElementById("cartCount").textContent = count;
+    }
+
+
+    /* ================= USER ================= */
+
+    function loadUser() {
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("freshBiteUser")
+            );
+
+        if (!user) {
+            return;
+        }
+
+        const name =
+            user.name ||
+            user.fullName ||
+            "FreshBite User";
+
+        const email =
+            user.email ||
+            "Welcome back!";
+
+        document.getElementById("sideUserName").textContent =
+            name;
+
+        document.getElementById("sideUserEmail").textContent =
+            email;
+
+        document.getElementById("welcomeName").textContent =
+            name.split(" ")[0];
+
+        document.getElementById("profileName").value =
+            name;
+
+        document.getElementById("profileEmail").value =
+            email;
+
+        document.getElementById("profilePhone").value =
+            user.phone || "";
+
+        document.getElementById("profileDob").value =
+            user.dob || "";
+    }
+
+
+    /* ================= NAVIGATION ================= */
+
+    const menuButtons =
+        document.querySelectorAll(".menu-btn");
+
+    const sections =
+        document.querySelectorAll(".section");
+
+
+    menuButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const target =
+                this.dataset.section;
+
+            if (!target) {
+                return;
+            }
+
+            menuButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+            sections.forEach(section =>
+                section.classList.remove("active")
+            );
+
+            const selected =
+                document.getElementById(target);
+
+            if (selected) {
+                selected.classList.add("active");
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    });
+
+
+    /* ================= ORDERS ================= */
+
+    function loadOrders() {
+
+        const order =
+            JSON.parse(
+                localStorage.getItem("freshBiteOrder")
+            );
+
+        const ordersList =
+            document.getElementById("ordersList");
+
+        const recentOrder =
+            document.getElementById("recentOrder");
+
+        const orderCount =
+            document.getElementById("orderCount");
+
+
+        if (!order) {
+
+            orderCount.textContent = "0";
+
+            const emptyHTML = `
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <h3>
+                        No orders yet
+                    </h3>
+
+                    <p>
+                        Your completed orders will appear here.
+                    </p>
+
+                    <a
+                        href="restaurants.html"
+                        class="browse-btn"
+                    >
+                        Browse Restaurants
+                    </a>
+
+                </div>
+
+            `;
+
+            ordersList.innerHTML =
+                emptyHTML;
+
+            recentOrder.innerHTML =
+                emptyHTML;
+
+            return;
+        }
+
+
+        orderCount.textContent = "1";
+
+
+        let itemText =
+            "Food items";
+
+        if (
+            order.items &&
+            order.items.length
+        ) {
+
+            itemText =
+                order.items
+                    .map(item =>
+                        `${item.name} × ${item.quantity || 1}`
+                    )
+                    .join(", ");
+
+        }
+
+
+        const orderHTML = `
+
+            <div class="order-card">
+
+                <div class="order-top">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #${order.orderId || "FBORDER"}
+                        </div>
+
+                        <div class="order-date">
+                            ${order.date || "Recent order"}
+                        </div>
+
+                    </div>
+
+                    <span class="status">
+                        ${order.status || "Order Confirmed"}
+                    </span>
+
+                </div>
+
+
+                <div class="order-items">
+                    ${itemText}
+                </div>
+
+
+                <div class="order-bottom">
+
+                    <div class="order-total">
+                        Total: ₹${Number(order.total || 0).toFixed(2)}
+                    </div>
+
+                    <a
+                        href="order-tracking.html"
+                        class="view-order-btn"
+                    >
+                        Track Order
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        ordersList.innerHTML =
+            orderHTML;
+
+        recentOrder.innerHTML =
+            orderHTML;
+    }
+
+
+    /* ================= SAVE PROFILE ================= */
+
+    function saveProfile() {
+
+        const existingUser =
+            JSON.parse(
+                localStorage.getItem("freshBiteUser")
+            ) || {};
+
+        const updatedUser = {
+
+            ...existingUser,
+
+            name:
+                document.getElementById(
+                    "profileName"
+                ).value.trim(),
+
+            email:
+                document.getElementById(
+                    "profileEmail"
+                ).value.trim(),
+
+            phone:
+                document.getElementById(
+                    "profilePhone"
+                ).value.trim(),
+
+            dob:
+                document.getElementById(
+                    "profileDob"
+                ).value
+
+        };
+
+
+        localStorage.setItem(
+            "freshBiteUser",
+            JSON.stringify(updatedUser)
+        );
+
+
+        loadUser();
+
+        showToast(
+            "Profile updated successfully!"
+        );
+    }
+
+
+    /* ================= ADD TO CART ================= */
+
+    function addToCart(name, price) {
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("freshBiteCart")
+            ) || [];
+
+
+        const existing =
+            cart.find(
+                item => item.name === name
+            );
+
+
+        if (existing) {
+
+            existing.quantity =
+                Number(existing.quantity || 1) + 1;
+
+        } else {
+
+            cart.push({
+
+                name: name,
+
+                price: price,
+
+                image: "",
+
+                quantity: 1
+
+            });
+
+        }
+
+
+        localStorage.setItem(
+            "freshBiteCart",
+            JSON.stringify(cart)
+        );
+
+
+        updateCartCount();
+
+        showToast(
+            name + " added to cart!"
+        );
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "freshBiteLoggedIn"
+                );
+
+                showToast(
+                    "Logged out successfully"
+                );
+
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        "login.html";
+
+                }, 900);
+
+            }
+        );
+
+
+    /* ================= TOAST ================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent =
+            message;
+
+        toast.classList.add("show");
+
+
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 2200);
+
+    }
+
+
+    /* ================= INITIALIZE ================= */
+
+    loadUser();
+
+    loadOrders();
+
+    updateCartCount();
+
+</script>
+
+</body>
+</html>

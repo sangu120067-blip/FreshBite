@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FreshBite - Menu</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,.07);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d3c33;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-link {
+            position: relative;
+            font-size: 20px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -9px;
+            right: -11px;
+            width: 19px;
+            height: 19px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .login-btn {
+            background: #ff6b35;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 22px;
+        }
+
+
+        /* HERO */
+
+        .restaurant-hero {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 35px;
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(45,27,18,.9),
+                    rgba(45,27,18,.45)
+                ),
+                url("https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1400&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #ff6b35;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .restaurant-hero h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-hero p {
+            color: #eee;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .restaurant-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .restaurant-info span {
+            font-size: 11px;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px 70px;
+        }
+
+
+        /* SEARCH */
+
+        .search-section {
+            display: flex;
+            gap: 12px;
+            margin: 30px 0 20px;
+        }
+
+        .search-box {
+            flex: 1;
+            background: white;
+            border: 1px solid #eaded7;
+            border-radius: 12px;
+            padding: 13px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box i {
+            color: #999;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        .sort-select {
+            border: 1px solid #eaded7;
+            border-radius: 12px;
+            background: white;
+            padding: 0 15px;
+            outline: none;
+            font-size: 12px;
+        }
+
+
+        /* CATEGORIES */
+
+        .section-title {
+            margin: 30px 0 15px;
+            font-size: 22px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .category-btn {
+            border: 1px solid #eaded7;
+            background: white;
+            padding: 9px 17px;
+            border-radius: 22px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+
+        /* DIET */
+
+        .diet-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0 15px;
+        }
+
+        .diet-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .diet-toggle {
+            display: flex;
+            border: 1px solid #eaded7;
+            padding: 4px;
+            background: white;
+            border-radius: 30px;
+        }
+
+        .diet-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 15px;
+            border-radius: 22px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .diet-btn.active {
+            background: #ff6b35;
+            color: white;
+        }
+
+
+        /* POPULAR STRIP */
+
+        .popular-strip {
+            background: #fff0e8;
+            border-radius: 12px;
+            padding: 13px 17px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #d94f1e;
+            font-size: 12px;
+        }
+
+
+        /* FOOD GRID */
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+
+        /* FOOD CARD */
+
+        .food-card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 17px;
+            overflow: hidden;
+            transition: .3s;
+            position: relative;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.09);
+        }
+
+        .food-image-link {
+            display: block;
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+        }
+
+        .food-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .4s;
+        }
+
+        .food-image-link:hover .food-image {
+            transform: scale(1.06);
+        }
+
+        .food-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .wishlist {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+            z-index: 3;
+        }
+
+        .wishlist.active {
+            color: #e53935;
+        }
+
+        .food-content {
+            padding: 16px;
+        }
+
+        .food-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .food-name:hover {
+            color: #ff6b35;
+        }
+
+        .food-desc {
+            color: #888;
+            font-size: 11px;
+            line-height: 1.6;
+            min-height: 35px;
+        }
+
+        .food-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 13px;
+        }
+
+        .rating {
+            background: #218c4d;
+            color: white;
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .diet-badge {
+            font-size: 9px;
+            font-weight: 700;
+            color: #258b4a;
+        }
+
+        .diet-badge.nonveg {
+            color: #d32f2f;
+        }
+
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .add-btn {
+            background: white;
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            transition: .25s;
+        }
+
+        .add-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+
+        /* NO RESULTS */
+
+        #noResults {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        #noResults i {
+            font-size: 35px;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #2d1b12;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: .3s;
+            z-index: 5000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: #6bd28b;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #2d1b12;
+            color: white;
+            padding: 45px 7% 25px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand h2 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: #c8b9b0;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        footer h3 {
+            font-size: 13px;
+            margin-bottom: 13px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        footer li a {
+            color: #c8b9b0;
+            font-size: 10px;
+        }
+
+        footer li a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.1);
+            margin-top: 30px;
+            padding-top: 18px;
+            text-align: center;
+            color: #9f9088;
+            font-size: 10px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media(max-width:900px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .food-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+        }
+
+
+        @media(max-width:650px) {
+
+            .navbar {
+                height: auto;
+                padding: 15px 5%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                overflow-x: auto;
+            }
+
+            .login-btn {
+                display: none;
+            }
+
+            .restaurant-hero {
+                margin: 15px;
+                padding: 25px;
+            }
+
+            .restaurant-hero h1 {
+                font-size: 28px;
+            }
+
+            .search-section {
+                flex-direction: column;
+            }
+
+            .sort-select {
+                height: 45px;
+            }
+
+            .diet-area {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-image-link {
+                height: 230px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width:420px) {
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-info {
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-bowl-food"></i>
+
+            FreshBite
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="menu.html" class="active">
+                Menu
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <a href="cart.html"
+                class="cart-link">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+
+            <a href="login.html"
+                class="login-btn">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- RESTAURANT HERO -->
+
+    <section class="restaurant-hero">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">
+                ⭐ TOP RATED RESTAURANT
+            </span>
+
+            <h1>
+                Urban Slice
+            </h1>
+
+            <p>
+                Delicious pizzas, burgers, pasta and more,
+                prepared fresh and delivered to your doorstep.
+            </p>
+
+
+            <div class="restaurant-info">
+
+                <span>
+                    ⭐ 4.8 Rating
+                </span>
+
+                <span>
+                    🕒 25–30 min
+                </span>
+
+                <span>
+                    💰 ₹300 for two
+                </span>
+
+                <span>
+                    🚚 Free Delivery
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-section">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="foodSearch"
+                    placeholder="Search dishes or cuisines...">
+
+            </div>
+
+
+            <select
+                class="sort-select"
+                id="sortSelect">
+
+                <option value="recommended">
+                    Recommended
+                </option>
+
+                <option value="rating">
+                    Top Rated
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- CATEGORIES -->
+
+        <h2 class="section-title">
+            Explore Categories
+        </h2>
+
+
+        <div class="categories">
+
+            <button
+                class="category-btn active"
+                data-category="all">
+
+                All
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="pizza">
+
+                🍕 Pizza
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="burger">
+
+                🍔 Burgers
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="pasta">
+
+                🍝 Pasta
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="chicken">
+
+                🍗 Chicken
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="dessert">
+
+                🍰 Desserts
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="drinks">
+
+                🥤 Drinks
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="starters">
+
+                🍟 Starters
+
+            </button>
+
+            <button
+                class="category-btn"
+                data-category="combos">
+
+                🎁 Combos
+
+            </button>
+
+        </div>
+
+
+
+        <!-- DIET -->
+
+        <div class="diet-area">
+
+            <div class="diet-title">
+                Our Menu
+            </div>
+
+
+            <div class="diet-toggle">
+
+                <button
+                    class="diet-btn active"
+                    data-diet="all">
+
+                    All
+
+                </button>
+
+                <button
+                    class="diet-btn"
+                    data-diet="veg">
+
+                    🟢 Veg
+
+                </button>
+
+                <button
+                    class="diet-btn"
+                    data-diet="nonveg">
+
+                    🔴 Non-Veg
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- POPULAR -->
+
+        <div class="popular-strip">
+
+            <i class="fa-solid fa-fire"></i>
+
+            <strong>
+                Popular today:
+            </strong>
+
+            Margherita Pizza, Crispy Chicken Burger
+            & New York Cheesecake
+
+        </div>
+
+
+
+        <!-- FOOD GRID -->
+
+        <div
+            class="food-grid"
+            id="foodGrid">
+
+
+            <!-- 1 -->
+
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-diet="veg"
+                data-name="margherita pizza"
+                data-price="249"
+                data-rating="4.8">
+
+
+                <a
+                    href="product.html?item=margherita-pizza"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Margherita Pizza">
+
+                    <span class="food-badge">
+                        Bestseller
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=margherita-pizza">
+
+                        <div class="food-name">
+                            Margherita Pizza
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Classic cheese pizza with tomato,
+                        mozzarella and fresh basil.
+                    </div>
+
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹249
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Margherita Pizza',249,'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 2 -->
+
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-diet="veg"
+                data-name="farmhouse pizza"
+                data-price="329"
+                data-rating="4.7">
+
+
+                <a
+                    href="product.html?item=farmhouse-pizza"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Farmhouse Pizza">
+
+                    <span class="food-badge">
+                        Popular
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=farmhouse-pizza">
+
+                        <div class="food-name">
+                            Farmhouse Pizza
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Loaded with fresh vegetables,
+                        cheese and signature sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹329
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Farmhouse Pizza',329,'https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 3 -->
+
+            <article
+                class="food-card"
+                data-category="starters"
+                data-diet="veg"
+                data-name="cheesy garlic bread"
+                data-price="149"
+                data-rating="4.6">
+
+
+                <a
+                    href="product.html?item=cheesy-garlic-bread"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1573140401552-3fab0b24306f?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Cheesy Garlic Bread">
+
+                    <span class="food-badge">
+                        Popular
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=cheesy-garlic-bread">
+
+                        <div class="food-name">
+                            Cheesy Garlic Bread
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Toasted garlic bread covered
+                        with melted cheese.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.6
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹149
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Cheesy Garlic Bread',149,'https://images.unsplash.com/photo-1573140401552-3fab0b24306f?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 4 -->
+
+            <article
+                class="food-card"
+                data-category="pasta"
+                data-diet="veg"
+                data-name="creamy alfredo pasta"
+                data-price="279"
+                data-rating="4.8">
+
+
+                <a
+                    href="product.html?item=creamy-alfredo-pasta"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Creamy Alfredo Pasta">
+
+                    <span class="food-badge">
+                        Bestseller
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=creamy-alfredo-pasta">
+
+                        <div class="food-name">
+                            Creamy Alfredo Pasta
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Creamy white sauce pasta with
+                        herbs, cheese and vegetables.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹279
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Creamy Alfredo Pasta',279,'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 5 -->
+
+            <article
+                class="food-card"
+                data-category="burger"
+                data-diet="veg"
+                data-name="classic veg burger"
+                data-price="199"
+                data-rating="4.6">
+
+
+                <a
+                    href="product.html?item=classic-veg-burger"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Classic Veg Burger">
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=classic-veg-burger">
+
+                        <div class="food-name">
+                            Classic Veg Burger
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Crispy veg patty with lettuce,
+                        tomato, cheese and sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.6
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹199
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Classic Veg Burger',199,'https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 6 -->
+
+            <article
+                class="food-card"
+                data-category="dessert"
+                data-diet="veg"
+                data-name="chocolate brownie"
+                data-price="129"
+                data-rating="4.7">
+
+
+                <a
+                    href="product.html?item=chocolate-brownie"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Chocolate Brownie">
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=chocolate-brownie">
+
+                        <div class="food-name">
+                            Chocolate Brownie
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Rich and fudgy chocolate brownie
+                        with intense chocolate flavour.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹129
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Chocolate Brownie',129,'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 7 -->
+
+            <article
+                class="food-card"
+                data-category="drinks"
+                data-diet="veg"
+                data-name="classic cold coffee"
+                data-price="119"
+                data-rating="4.5">
+
+
+                <a
+                    href="product.html?item=classic-cold-coffee"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Classic Cold Coffee">
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=classic-cold-coffee">
+
+                        <div class="food-name">
+                            Classic Cold Coffee
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Smooth chilled coffee with
+                        creamy milk and ice.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.5
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹119
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Classic Cold Coffee',119,'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 8 -->
+
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-diet="veg"
+                data-name="spicy paneer pizza"
+                data-price="299"
+                data-rating="4.8">
+
+
+                <a
+                    href="product.html?item=spicy-paneer-pizza"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Spicy Paneer Pizza">
+
+                    <span class="food-badge">
+                        Spicy
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=spicy-paneer-pizza">
+
+                        <div class="food-name">
+                            Spicy Paneer Pizza
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Spicy paneer with onion,
+                        capsicum and mozzarella.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹299
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Spicy Paneer Pizza',299,'https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 9 -->
+
+            <article
+                class="food-card"
+                data-category="dessert"
+                data-diet="veg"
+                data-name="new york cheesecake"
+                data-price="189"
+                data-rating="4.9">
+
+
+                <a
+                    href="product.html?item=new-york-cheesecake"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="New York Cheesecake">
+
+                    <span class="food-badge">
+                        Top Rated
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=new-york-cheesecake">
+
+                        <div class="food-name">
+                            New York Cheesecake
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Creamy classic cheesecake
+                        with buttery biscuit crust.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.9
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹189
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'New York Cheesecake',189,'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 10 -->
+
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-diet="nonveg"
+                data-name="chicken pepperoni pizza"
+                data-price="349"
+                data-rating="4.8">
+
+
+                <a
+                    href="product.html?item=chicken-pepperoni-pizza"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Chicken Pepperoni Pizza">
+
+                    <span class="food-badge">
+                        Bestseller
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=chicken-pepperoni-pizza">
+
+                        <div class="food-name">
+                            Chicken Pepperoni Pizza
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Chicken pepperoni with mozzarella
+                        and rich tomato sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="diet-badge nonveg">
+                            ● NON-VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹349
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Chicken Pepperoni Pizza',349,'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 11 -->
+
+            <article
+                class="food-card"
+                data-category="burger"
+                data-diet="nonveg"
+                data-name="crispy chicken burger"
+                data-price="249"
+                data-rating="4.7">
+
+
+                <a
+                    href="product.html?item=crispy-chicken-burger"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Crispy Chicken Burger">
+
+                    <span class="food-badge">
+                        Best Seller
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=crispy-chicken-burger">
+
+                        <div class="food-name">
+                            Crispy Chicken Burger
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Crispy chicken fillet with
+                        lettuce, cheese and sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                        <span class="diet-badge nonveg">
+                            ● NON-VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹249
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Crispy Chicken Burger',249,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 12 -->
+
+            <article
+                class="food-card"
+                data-category="chicken"
+                data-diet="nonveg"
+                data-name="spicy chicken wings"
+                data-price="229"
+                data-rating="4.6">
+
+
+                <a
+                    href="product.html?item=spicy-chicken-wings"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Spicy Chicken Wings">
+
+                    <span class="food-badge">
+                        Spicy
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=spicy-chicken-wings">
+
+                        <div class="food-name">
+                            Spicy Chicken Wings
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Crispy chicken wings tossed
+                        in smoky spicy sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.6
+                        </span>
+
+                        <span class="diet-badge nonveg">
+                            ● NON-VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹229
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Spicy Chicken Wings',229,'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 13 -->
+
+            <article
+                class="food-card"
+                data-category="combos"
+                data-diet="veg"
+                data-name="veg pizza combo"
+                data-price="399"
+                data-rating="4.7">
+
+
+                <a
+                    href="product.html?item=veg-pizza-combo"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1548365328-8b849e6f90c8?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Veg Pizza Combo">
+
+                    <span class="food-badge">
+                        Great Deal
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=veg-pizza-combo">
+
+                        <div class="food-name">
+                            Veg Pizza Combo
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Veg pizza with garlic bread
+                        and refreshing cold drink.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹399
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Veg Pizza Combo',399,'https://images.unsplash.com/photo-1548365328-8b849e6f90c8?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 14 -->
+
+            <article
+                class="food-card"
+                data-category="combos"
+                data-diet="nonveg"
+                data-name="chicken burger combo"
+                data-price="429"
+                data-rating="4.8">
+
+
+                <a
+                    href="product.html?item=chicken-burger-combo"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Chicken Burger Combo">
+
+                    <span class="food-badge">
+                        Value Combo
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=chicken-burger-combo">
+
+                        <div class="food-name">
+                            Chicken Burger Combo
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Chicken burger with fries
+                        and chilled soft drink.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="diet-badge nonveg">
+                            ● NON-VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹429
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Chicken Burger Combo',429,'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- 15 -->
+
+            <article
+                class="food-card"
+                data-category="starters"
+                data-diet="veg"
+                data-name="crispy veg nuggets"
+                data-price="169"
+                data-rating="4.5">
+
+
+                <a
+                    href="product.html?item=crispy-veg-nuggets"
+                    class="food-image-link">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
+                        class="food-image"
+                        alt="Crispy Veg Nuggets">
+
+                    <span class="food-badge">
+                        New
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="wishlist"
+                    onclick="toggleWishlist(event,this)">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <div class="food-content">
+
+                    <a href="product.html?item=crispy-veg-nuggets">
+
+                        <div class="food-name">
+                            Crispy Veg Nuggets
+                        </div>
+
+                    </a>
+
+                    <div class="food-desc">
+                        Golden crispy vegetable nuggets
+                        with creamy dipping sauce.
+                    </div>
+
+                    <div class="food-meta">
+
+                        <span class="rating">
+                            ★ 4.5
+                        </span>
+
+                        <span class="diet-badge">
+                            ● VEG
+                        </span>
+
+                    </div>
+
+                    <div class="bottom-row">
+
+                        <span class="price">
+                            ₹169
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(event,'Crispy Veg Nuggets',169,'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80')">
+
+                            ADD +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- NO RESULTS -->
+
+        <div id="noResults">
+
+            <i class="fa-solid fa-face-sad-tear"></i>
+
+            <h3>
+                No dishes found
+            </h3>
+
+            <p>
+                Try another search or category.
+            </p>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <h2>
+                    <i class="fa-solid fa-bowl-food"></i>
+                    FreshBite
+                </h2>
+
+                <p>
+                    Delicious food from your favourite
+                    restaurants, delivered quickly to
+                    your doorstep.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="restaurants.html">
+                            Restaurants
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="menu.html">
+                            Menu
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Follow Us
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Facebook
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Twitter
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 FreshBite. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span id="toastMessage">
+            Added to cart
+        </span>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        const foodCards =
+            document.querySelectorAll(".food-card");
+
+        const categoryButtons =
+            document.querySelectorAll(".category-btn");
+
+        const dietButtons =
+            document.querySelectorAll(".diet-btn");
+
+        const searchInput =
+            document.getElementById("foodSearch");
+
+        const sortSelect =
+            document.getElementById("sortSelect");
+
+
+        let selectedCategory = "all";
+
+        let selectedDiet = "all";
+
+
+        /* =========================
+           CATEGORY FILTER
+        ========================= */
+
+        categoryButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                categoryButtons.forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+                button.classList.add("active");
+
+
+                selectedCategory =
+                    button.dataset.category;
+
+
+                filterFood();
+
+            });
+
+        });
+
+
+        /* =========================
+           DIET FILTER
+        ========================= */
+
+        dietButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                dietButtons.forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+                button.classList.add("active");
+
+
+                selectedDiet =
+                    button.dataset.diet;
+
+
+                filterFood();
+
+            });
+
+        });
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        searchInput.addEventListener(
+            "input",
+            filterFood
+        );
+
+
+        /* =========================
+           SORT
+        ========================= */
+
+        sortSelect.addEventListener(
+            "change",
+            sortFood
+        );
+
+
+        /* =========================
+           FILTER FOOD
+        ========================= */
+
+        function filterFood() {
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            let visibleCards = [];
+
+
+            foodCards.forEach(card => {
+
+                const category =
+                    card.dataset.category;
+
+                const diet =
+                    card.dataset.diet;
+
+                const name =
+                    card.dataset.name;
+
+                const categoryMatch =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+                const dietMatch =
+                    selectedDiet === "all" ||
+                    diet === selectedDiet;
+
+                const searchMatch =
+                    name.includes(searchText);
+
+
+                if (
+                    categoryMatch &&
+                    dietMatch &&
+                    searchMatch
+                ) {
+
+                    card.style.display = "block";
+
+                    visibleCards.push(card);
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            const noResults =
+                document.getElementById(
+                    "noResults"
+                );
+
+
+            noResults.style.display =
+                visibleCards.length === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        /* =========================
+           SORT FOOD
+        ========================= */
+
+        function sortFood() {
+
+            const grid =
+                document.getElementById(
+                    "foodGrid"
+                );
+
+
+            const cards =
+                Array.from(
+                    document.querySelectorAll(
+                        ".food-card"
+                    )
+                );
+
+
+            const option =
+                sortSelect.value;
+
+
+            cards.sort((a,b) => {
+
+                const priceA =
+                    Number(a.dataset.price);
+
+                const priceB =
+                    Number(b.dataset.price);
+
+                const ratingA =
+                    Number(a.dataset.rating);
+
+                const ratingB =
+                    Number(b.dataset.rating);
+
+
+                if (option === "low") {
+
+                    return priceA - priceB;
+
+                }
+
+
+                if (option === "high") {
+
+                    return priceB - priceA;
+
+                }
+
+
+                if (option === "rating") {
+
+                    return ratingB - ratingA;
+
+                }
+
+
+                return 0;
+
+            });
+
+
+            cards.forEach(card => {
+
+                grid.appendChild(card);
+
+            });
+
+
+            filterFood();
+
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================= */
+
+        function addToCart(
+            event,
+            name,
+            price,
+            image
+        ) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "freshBiteCart"
+                    )
+                ) || [];
+
+
+            const existing =
+                cart.find(
+                    item =>
+                        item.name === name
+                );
+
+
+            if (existing) {
+
+                existing.quantity =
+                    (
+                        Number(
+                            existing.quantity
+                        ) || 1
+                    ) + 1;
+
+            } else {
+
+                cart.push({
+
+                    name: name,
+
+                    price: price,
+
+                    image: image,
+
+                    quantity: 1
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "freshBiteCart",
+                JSON.stringify(cart)
+            );
+
+
+            updateCartCount();
+
+
+            showToast(
+                name + " added to cart"
+            );
+
+        }
+
+
+        /* =========================
+           CART COUNT
+        ========================= */
+
+        function updateCartCount() {
+
+            const cart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "freshBiteCart"
+                    )
+                ) || [];
+
+
+            let count = 0;
+
+
+            cart.forEach(item => {
+
+                count +=
+                    Number(
+                        item.quantity
+                    ) || 1;
+
+            });
+
+
+            document.getElementById(
+                "cartCount"
+            ).textContent = count;
+
+        }
+
+
+        /* =========================
+           WISHLIST
+        ========================= */
+
+        function toggleWishlist(
+            event,
+            button
+        ) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            button.classList.toggle(
+                "active"
+            );
+
+
+            const icon =
+                button.querySelector("i");
+
+
+            if (
+                button.classList.contains(
+                    "active"
+                )
+            ) {
+
+                icon.classList.remove(
+                    "fa-regular"
+                );
+
+                icon.classList.add(
+                    "fa-solid"
+                );
+
+                showToast(
+                    "Added to wishlist"
+                );
+
+            } else {
+
+                icon.classList.remove(
+                    "fa-solid"
+                );
+
+                icon.classList.add(
+                    "fa-regular"
+                );
+
+                showToast(
+                    "Removed from wishlist"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            document.getElementById(
+                "toastMessage"
+            ).textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 2200);
+
+        }
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        updateCartCount();
+
+        filterFood();
+
+    </script>
+
+
+</body>
+
+</html>

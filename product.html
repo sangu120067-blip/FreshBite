@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>FreshBite - Product Details</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #2d1b12;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            font-size: 23px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #4d3c33;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-link {
+            position: relative;
+            font-size: 20px;
+            color: #2d1b12;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -9px;
+            right: -11px;
+            min-width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: #ff6b35;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .login-btn {
+            background: #ff6b35;
+            color: white !important;
+            padding: 10px 19px;
+            border-radius: 22px;
+        }
+
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb-wrapper {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px 20px 10px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .breadcrumb a:hover {
+            color: #ff6b35;
+        }
+
+
+        /* =========================
+           PRODUCT SECTION
+        ========================= */
+
+        .product-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 20px 70px;
+        }
+
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: #ffffff;
+            border: 1px solid #eee1da;
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(45, 27, 18, 0.05);
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
+        .image-section {
+            position: relative;
+        }
+
+        .main-image-box {
+            height: 440px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #f6eee9;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .main-image:hover {
+            transform: scale(1.03);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: #ff6b35;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .wishlist-main {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: #ffffff;
+            color: #555;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: 0.25s;
+        }
+
+        .wishlist-main:hover {
+            transform: scale(1.08);
+        }
+
+        .wishlist-main.active {
+            color: #e53935;
+        }
+
+
+        /* =========================
+           PRODUCT DETAILS
+        ========================= */
+
+        .product-details {
+            padding: 10px 10px 10px 0;
+        }
+
+        .food-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #dcecdf;
+            background: #f2faf4;
+            color: #238b4b;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .food-type.nonveg {
+            border-color: #f2d5d5;
+            background: #fff3f3;
+            color: #d32f2f;
+        }
+
+        .product-title {
+            font-size: 36px;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .product-description {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 17px;
+        }
+
+
+        /* =========================
+           RATING
+        ========================= */
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .rating-box {
+            background: #218c4d;
+            color: white;
+            padding: 6px 9px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .rating-text {
+            color: #555;
+            font-size: 12px;
+        }
+
+        .dot {
+            color: #aaa;
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        .discount {
+            color: #e45120;
+            background: #fff0e9;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           DELIVERY INFO
+        ========================= */
+
+        .delivery-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 23px;
+        }
+
+        .delivery-item {
+            background: #fff8f3;
+            border: 1px solid #f3e3da;
+            border-radius: 11px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .delivery-item i {
+            color: #ff6b35;
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .delivery-item strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .delivery-item span {
+            color: #888;
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           CUSTOMIZATION
+        ========================= */
+
+        .customization {
+            border-top: 1px solid #eee4df;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .custom-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .custom-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee3dd;
+            font-size: 12px;
+        }
+
+        .custom-option label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .custom-option input {
+            accent-color: #ff6b35;
+        }
+
+        .custom-price {
+            color: #777;
+        }
+
+
+        /* =========================
+           QUANTITY + BUTTONS
+        ========================= */
+
+        .buy-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e2d5ce;
+            border-radius: 9px;
+            overflow: hidden;
+        }
+
+        .quantity button {
+            width: 38px;
+            height: 43px;
+            border: none;
+            background: #fff7f2;
+            cursor: pointer;
+            font-size: 16px;
+            color: #2d1b12;
+        }
+
+        .quantity button:hover {
+            background: #ffe9dd;
+        }
+
+        .quantity span {
+            width: 40px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .add-cart-btn {
+            flex: 1;
+            border: 1px solid #ff6b35;
+            background: white;
+            color: #ff6b35;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.25s;
+        }
+
+        .add-cart-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .buy-now-btn {
+            flex: 1;
+            border: none;
+            background: #ff6b35;
+            color: white;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.25s;
+        }
+
+        .buy-now-btn:hover {
+            background: #e85522;
+        }
+
+
+        /* =========================
+           OFFER BOX
+        ========================= */
+
+        .offer-box {
+            margin-top: 20px;
+            background: linear-gradient(
+                135deg,
+                #fff2e9,
+                #fffaf5
+            );
+            border: 1px dashed #ffb393;
+            border-radius: 12px;
+            padding: 13px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .offer-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #ff6b35;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offer-box strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .offer-box span {
+            color: #777;
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           LOWER SECTION
+        ========================= */
+
+        .lower-section {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 17px;
+            padding: 25px;
+        }
+
+        .info-card h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        .info-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           REVIEWS
+        ========================= */
+
+        .review-summary {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: #fff8f3;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .big-rating {
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .stars {
+            color: #f4a623;
+            letter-spacing: 2px;
+        }
+
+        .review-count {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .review {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee7e3;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .review-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .review-date {
+            color: #999;
+            font-size: 10px;
+        }
+
+        .review p {
+            font-size: 11px;
+            color: #777;
+        }
+
+
+        /* =========================
+           WHY ORDER
+        ========================= */
+
+        .why-list {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .why-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            background: #fff0e8;
+            color: #ff6b35;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .why-item strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .why-item span {
+            color: #888;
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           RELATED DISHES
+        ========================= */
+
+        .related-section {
+            margin-top: 40px;
+        }
+
+        .related-section h2 {
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .related-card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .related-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .related-content {
+            padding: 13px;
+        }
+
+        .related-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .related-rating {
+            display: inline-block;
+            margin-top: 7px;
+            background: #218c4d;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+        }
+
+        .related-price {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #2d1b12;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 5000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: #6bd28b;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #2d1b12;
+            color: white;
+            padding: 45px 7% 25px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand h2 {
+            color: #ff6b35;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            color: #c8b9b0;
+            font-size: 12px;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        footer h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 9px;
+        }
+
+        footer li a {
+            color: #c8b9b0;
+            font-size: 11px;
+        }
+
+        footer li a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            text-align: center;
+            color: #9f9088;
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .product-details {
+                padding: 0;
+            }
+
+            .lower-section {
+                grid-template-columns: 1fr;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                padding: 15px 5%;
+                flex-wrap: wrap;
+                gap: 13px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                overflow-x: auto;
+            }
+
+            .nav-links a {
+                white-space: nowrap;
+            }
+
+            .login-btn {
+                display: none;
+            }
+
+            .product-container {
+                padding: 10px 14px 50px;
+            }
+
+            .product-main {
+                padding: 15px;
+                border-radius: 16px;
+            }
+
+            .main-image-box {
+                height: 320px;
+            }
+
+            .product-title {
+                font-size: 28px;
+            }
+
+            .product-description {
+                font-size: 12px;
+            }
+
+            .delivery-box {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .buy-row {
+                flex-wrap: wrap;
+            }
+
+            .quantity {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .quantity button {
+                width: 50px;
+            }
+
+            .quantity span {
+                width: 60px;
+            }
+
+            .add-cart-btn,
+            .buy-now-btn {
+                min-height: 45px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .related-image {
+                height: 125px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .delivery-item {
+                padding: 10px 4px;
+            }
+
+            .delivery-item strong {
+                font-size: 9px;
+            }
+
+            .delivery-item span {
+                font-size: 8px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-bowl-food"></i>
+
+            FreshBite
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="menu.html" class="active">
+                Menu
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <a href="cart.html" class="cart-link">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+
+            <a href="login.html"
+                class="login-btn">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         BREADCRUMB
+    ========================= -->
+
+    <div class="breadcrumb-wrapper">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span id="breadcrumbName">
+                Product
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         PRODUCT
+    ========================= -->
+
+    <main class="product-container">
+
+        <section class="product-main">
+
+
+            <!-- IMAGE -->
+
+            <div class="image-section">
+
+                <div class="main-image-box">
+
+                    <img
+                        id="productImage"
+                        class="main-image"
+                        src=""
+                        alt="Food">
+
+                    <span
+                        class="offer-badge"
+                        id="offerBadge">
+                        20% OFF
+                    </span>
+
+
+                    <button
+                        class="wishlist-main"
+                        id="wishlistButton"
+                        onclick="toggleWishlist()">
+
+                        <i
+                            class="fa-regular fa-heart"
+                            id="wishlistIcon">
+                        </i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DETAILS -->
+
+            <div class="product-details">
+
+
+                <div
+                    class="food-type"
+                    id="foodType">
+
+                    🟢 VEG
+
+                </div>
+
+
+                <h1
+                    class="product-title"
+                    id="productName">
+
+                    Loading...
+
+                </h1>
+
+
+                <p
+                    class="product-description"
+                    id="productDescription">
+
+                    Loading product details...
+
+                </p>
+
+
+                <!-- RATING -->
+
+                <div class="rating-row">
+
+                    <span
+                        class="rating-box"
+                        id="productRating">
+
+                        ★ 4.8
+
+                    </span>
+
+                    <span class="rating-text">
+                        250+ ratings
+                    </span>
+
+                    <span class="dot">
+                        •
+                    </span>
+
+                    <span class="rating-text">
+                        100+ reviews
+                    </span>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="price-row">
+
+                    <span
+                        class="current-price"
+                        id="productPrice">
+
+                        ₹249
+
+                    </span>
+
+                    <span
+                        class="old-price"
+                        id="oldPrice">
+
+                        ₹299
+
+                    </span>
+
+                    <span
+                        class="discount"
+                        id="discountText">
+
+                        17% OFF
+
+                    </span>
+
+                </div>
+
+
+                <!-- DELIVERY -->
+
+                <div class="delivery-box">
+
+                    <div class="delivery-item">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <strong>
+                            25–30 min
+                        </strong>
+
+                        <span>
+                            Delivery
+                        </span>
+
+                    </div>
+
+
+                    <div class="delivery-item">
+
+                        <i class="fa-solid fa-motorcycle"></i>
+
+                        <strong>
+                            Free
+                        </strong>
+
+                        <span>
+                            Delivery
+                        </span>
+
+                    </div>
+
+
+                    <div class="delivery-item">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <strong>
+                            Safe
+                        </strong>
+
+                        <span>
+                            Packaging
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CUSTOMIZATION -->
+
+                <div class="customization">
+
+                    <div class="custom-title">
+
+                        Customize your order
+
+                    </div>
+
+
+                    <div class="custom-option">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                value="extra-cheese"
+                                data-price="30">
+
+                            Extra Cheese
+
+                        </label>
+
+                        <span class="custom-price">
+                            +₹30
+                        </span>
+
+                    </div>
+
+
+                    <div class="custom-option">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                value="extra-spicy"
+                                data-price="20">
+
+                            Extra Spicy
+
+                        </label>
+
+                        <span class="custom-price">
+                            +₹20
+                        </span>
+
+                    </div>
+
+
+                    <div class="custom-option">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                value="extra-sauce"
+                                data-price="15">
+
+                            Extra Sauce
+
+                        </label>
+
+                        <span class="custom-price">
+                            +₹15
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUY -->
+
+                <div class="buy-row">
+
+
+                    <div class="quantity">
+
+                        <button
+                            onclick="changeQuantity(-1)">
+
+                            −
+
+                        </button>
+
+
+                        <span
+                            id="quantity">
+
+                            1
+
+                        </span>
+
+
+                        <button
+                            onclick="changeQuantity(1)">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="add-cart-btn"
+                        onclick="addToCart()">
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow()">
+
+                        Buy Now
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- OFFER -->
+
+                <div class="offer-box">
+
+                    <div class="offer-icon">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Get extra ₹150 OFF
+                        </strong>
+
+                        <span>
+                            Use coupon FRESH150 on your first order
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             LOWER INFORMATION
+        ========================= -->
+
+        <section class="lower-section">
+
+
+            <!-- ABOUT FOOD -->
+
+            <div class="info-card">
+
+                <h2>
+                    About this dish
+                </h2>
+
+                <p id="aboutDish">
+
+                    Freshly prepared using quality ingredients.
+                    Every order is prepared after you place it
+                    to ensure freshness, great taste and quality.
+
+                </p>
+
+
+                <br>
+
+
+                <p>
+
+                    <strong>
+                        Ingredients:
+                    </strong>
+
+                    Fresh vegetables, premium cheese,
+                    herbs, signature sauces and carefully
+                    selected ingredients.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- WHY ORDER -->
+
+            <div class="info-card">
+
+                <h2>
+                    Why order from FreshBite?
+                </h2>
+
+
+                <div class="why-list">
+
+
+                    <div class="why-item">
+
+                        <div class="why-icon">
+
+                            <i class="fa-solid fa-bolt"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Fast Delivery
+                            </strong>
+
+                            <span>
+                                Delivered fresh and fast
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="why-item">
+
+                        <div class="why-icon">
+
+                            <i class="fa-solid fa-star"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Trusted Ratings
+                            </strong>
+
+                            <span>
+                                Ratings from real customers
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="why-item">
+
+                        <div class="why-icon">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Secure Payments
+                            </strong>
+
+                            <span>
+                                Safe and secure checkout
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="why-item">
+
+                        <div class="why-icon">
+
+                            <i class="fa-solid fa-headset"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Easy Support
+                            </strong>
+
+                            <span>
+                                We're here when you need us
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             REVIEWS
+        ========================= -->
+
+        <section class="info-card"
+            style="margin-top:25px;">
+
+            <h2>
+                Customer Reviews
+            </h2>
+
+
+            <div class="review-summary">
+
+                <div>
+
+                    <div class="big-rating">
+                        4.8
+                    </div>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div class="review-count">
+                        Based on 250+ ratings
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Excellent choice!
+                    </strong>
+
+                    <p>
+                        Customers love the taste,
+                        freshness and quick delivery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="review-header">
+
+                    <span class="review-name">
+                        Rahul
+                    </span>
+
+                    <span class="review-date">
+                        2 days ago
+                    </span>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Really tasty and arrived hot.
+                    Will definitely order again.
+                </p>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="review-header">
+
+                    <span class="review-name">
+                        Ananya
+                    </span>
+
+                    <span class="review-date">
+                        5 days ago
+                    </span>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Great quality and the portion
+                    size was perfect.
+                </p>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="review-header">
+
+                    <span class="review-name">
+                        Kiran
+                    </span>
+
+                    <span class="review-date">
+                        1 week ago
+                    </span>
+
+                </div>
+
+                <div class="stars">
+                    ★★★★☆
+                </div>
+
+                <p>
+                    Good food and very quick delivery.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             RELATED DISHES
+        ========================= -->
+
+        <section class="related-section">
+
+            <h2>
+                You may also like
+            </h2>
+
+
+            <div
+                class="related-grid"
+                id="relatedGrid">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <h2>
+
+                    <i class="fa-solid fa-bowl-food"></i>
+
+                    FreshBite
+
+                </h2>
+
+                <p>
+                    Delicious food from your favourite
+                    restaurants, delivered quickly to
+                    your doorstep.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="restaurants.html">
+                            Restaurants
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="menu.html">
+                            Menu
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Help Centre
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Follow Us
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Facebook
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Twitter
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 FreshBite. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+         TOAST
+    ========================= -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span id="toastMessage">
+            Added to cart
+        </span>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           PRODUCT DATABASE
+        ========================= */
+
+        const products = {
+
+            "margherita-pizza": {
+
+                name: "Margherita Pizza",
+
+                price: 249,
+
+                oldPrice: 299,
+
+                rating: 4.8,
+
+                diet: "veg",
+
+                category: "pizza",
+
+                badge: "Bestseller",
+
+                image:
+                    "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Classic Italian-style pizza topped with rich tomato sauce, melted mozzarella cheese and fresh basil.",
+
+                about:
+                    "Our Margherita Pizza is freshly baked with a crispy golden crust, rich tomato sauce, premium mozzarella and fragrant basil. It is one of FreshBite's most loved dishes."
+
+            },
+
+
+            "farmhouse-pizza": {
+
+                name: "Farmhouse Pizza",
+
+                price: 329,
+
+                oldPrice: 379,
+
+                rating: 4.7,
+
+                diet: "veg",
+
+                category: "pizza",
+
+                badge: "Popular",
+
+                image:
+                    "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "A loaded vegetable pizza packed with onion, capsicum, tomato, mushroom and melted cheese.",
+
+                about:
+                    "Farmhouse Pizza brings together fresh vegetables, premium cheese and our signature pizza sauce on a freshly baked crust."
+
+            },
+
+
+            "cheesy-garlic-bread": {
+
+                name: "Cheesy Garlic Bread",
+
+                price: 149,
+
+                oldPrice: 179,
+
+                rating: 4.6,
+
+                diet: "veg",
+
+                category: "starters",
+
+                badge: "Popular",
+
+                image:
+                    "https://images.unsplash.com/photo-1573140401552-3fab0b24306f?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Crispy toasted garlic bread loaded with melted mozzarella cheese and aromatic herbs.",
+
+                about:
+                    "Golden toasted bread brushed with garlic butter and covered with melted cheese. A perfect starter or side dish."
+
+            },
+
+
+            "creamy-alfredo-pasta": {
+
+                name: "Creamy Alfredo Pasta",
+
+                price: 279,
+
+                oldPrice: 319,
+
+                rating: 4.8,
+
+                diet: "veg",
+
+                category: "pasta",
+
+                badge: "Bestseller",
+
+                image:
+                    "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Creamy white sauce pasta prepared with herbs, cheese and fresh vegetables.",
+
+                about:
+                    "Smooth and creamy Alfredo sauce combined with perfectly cooked pasta, herbs, cheese and fresh vegetables."
+
+            },
+
+
+            "classic-veg-burger": {
+
+                name: "Classic Veg Burger",
+
+                price: 199,
+
+                oldPrice: 229,
+
+                rating: 4.6,
+
+                diet: "veg",
+
+                category: "burger",
+
+                badge: "Popular",
+
+                image:
+                    "https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Crispy vegetable patty layered with lettuce, tomato, cheese and signature sauce.",
+
+                about:
+                    "A delicious crispy vegetable patty served inside a soft toasted bun with fresh vegetables and creamy sauce."
+
+            },
+
+
+            "chocolate-brownie": {
+
+                name: "Chocolate Brownie",
+
+                price: 129,
+
+                oldPrice: 159,
+
+                rating: 4.7,
+
+                diet: "veg",
+
+                category: "dessert",
+
+                badge: "Sweet Pick",
+
+                image:
+                    "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Rich and fudgy chocolate brownie with an intense chocolate flavour.",
+
+                about:
+                    "A soft, rich and fudgy chocolate brownie baked fresh and served with a deliciously deep chocolate flavour."
+
+            },
+
+
+            "classic-cold-coffee": {
+
+                name: "Classic Cold Coffee",
+
+                price: 119,
+
+                oldPrice: 149,
+
+                rating: 4.5,
+
+                diet: "veg",
+
+                category: "drinks",
+
+                badge: "Refreshing",
+
+                image:
+                    "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Smooth chilled coffee blended with creamy milk, ice and a touch of sweetness.",
+
+                about:
+                    "A refreshing chilled coffee made using quality coffee, creamy milk and perfectly balanced sweetness."
+
+            },
+
+
+            "spicy-paneer-pizza": {
+
+                name: "Spicy Paneer Pizza",
+
+                price: 299,
+
+                oldPrice: 349,
+
+                rating: 4.8,
+
+                diet: "veg",
+
+                category: "pizza",
+
+                badge: "Spicy",
+
+                image:
+                    "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Spicy paneer, onion, capsicum and mozzarella served on a crispy pizza crust.",
+
+                about:
+                    "Fresh paneer cubes combined with spicy seasoning, crunchy vegetables and premium mozzarella."
+
+            },
+
+
+            "new-york-cheesecake": {
+
+                name: "New York Cheesecake",
+
+                price: 189,
+
+                oldPrice: 219,
+
+                rating: 4.9,
+
+                diet: "veg",
+
+                category: "dessert",
+
+                badge: "Top Rated",
+
+                image:
+                    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Creamy classic cheesecake with a buttery biscuit crust.",
+
+                about:
+                    "Smooth and creamy New York-style cheesecake prepared with a buttery biscuit base."
+
+            },
+
+
+            "chicken-pepperoni-pizza": {
+
+                name: "Chicken Pepperoni Pizza",
+
+                price: 349,
+
+                oldPrice: 399,
+
+                rating: 4.8,
+
+                diet: "nonveg",
+
+                category: "pizza",
+
+                badge: "Bestseller",
+
+                image:
+                    "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Loaded with chicken pepperoni, mozzarella cheese and rich tomato sauce.",
+
+                about:
+                    "A delicious non-veg pizza topped with flavourful chicken pepperoni, mozzarella and signature tomato sauce."
+
+            },
+
+
+            "crispy-chicken-burger": {
+
+                name: "Crispy Chicken Burger",
+
+                price: 249,
+
+                oldPrice: 289,
+
+                rating: 4.7,
+
+                diet: "nonveg",
+
+                category: "burger",
+
+                badge: "Best Seller",
+
+                image:
+                    "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Crispy chicken fillet layered with lettuce, cheese and creamy signature sauce.",
+
+                about:
+                    "Crispy golden chicken fillet served with fresh lettuce, cheese and our creamy signature sauce."
+
+            },
+
+
+            "spicy-chicken-wings": {
+
+                name: "Spicy Chicken Wings",
+
+                price: 229,
+
+                oldPrice: 269,
+
+                rating: 4.6,
+
+                diet: "nonveg",
+
+                category: "chicken",
+
+                badge: "Spicy",
+
+                image:
+                    "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Crispy chicken wings tossed in a spicy and smoky signature sauce.",
+
+                about:
+                    "Crispy chicken wings coated with our spicy smoky sauce for a bold and delicious flavour."
+
+            },
+
+
+            "veg-pizza-combo": {
+
+                name: "Veg Pizza Combo",
+
+                price: 399,
+
+                oldPrice: 469,
+
+                rating: 4.7,
+
+                diet: "veg",
+
+                category: "combos",
+
+                badge: "Great Deal",
+
+                image:
+                    "https://images.unsplash.com/photo-1548365328-8b849e6f90c8?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Medium veg pizza served with garlic bread and a refreshing cold drink.",
+
+                about:
+                    "A complete vegetarian meal featuring a delicious pizza, cheesy garlic bread and a refreshing drink."
+
+            },
+
+
+            "chicken-burger-combo": {
+
+                name: "Chicken Burger Combo",
+
+                price: 429,
+
+                oldPrice: 499,
+
+                rating: 4.8,
+
+                diet: "nonveg",
+
+                category: "combos",
+
+                badge: "Value Combo",
+
+                image:
+                    "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Crispy chicken burger served with golden fries and a chilled soft drink.",
+
+                about:
+                    "A satisfying combo featuring a crispy chicken burger, crunchy fries and a refreshing drink."
+
+            },
+
+
+            "crispy-veg-nuggets": {
+
+                name: "Crispy Veg Nuggets",
+
+                price: 169,
+
+                oldPrice: 199,
+
+                rating: 4.5,
+
+                diet: "veg",
+
+                category: "starters",
+
+                badge: "New",
+
+                image:
+                    "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80",
+
+                description:
+                    "Golden crispy vegetable nuggets served with a creamy dipping sauce.",
+
+                about:
+                    "Crunchy golden nuggets made with delicious vegetables and served with a creamy signature dip."
+
+            }
+
+        };
+
+
+        /* =========================
+           GET PRODUCT FROM URL
+        ========================= */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        let productKey =
+            params.get("item");
+
+
+        if (!productKey) {
+
+            productKey = "margherita-pizza";
+
+        }
+
+
+        const product =
+            products[productKey] ||
+            products["margherita-pizza"];
+
+
+        /* =========================
+           LOAD PRODUCT
+        ========================= */
+
+        function loadProduct() {
+
+            document.title =
+                "FreshBite - " +
+                product.name;
+
+
+            document.getElementById(
+                "productName"
+            ).textContent =
+                product.name;
+
+
+            document.getElementById(
+                "breadcrumbName"
+            ).textContent =
+                product.name;
+
+
+            document.getElementById(
+                "productImage"
+            ).src =
+                product.image;
+
+
+            document.getElementById(
+                "productImage"
+            ).alt =
+                product.name;
+
+
+            document.getElementById(
+                "productDescription"
+            ).textContent =
+                product.description;
+
+
+            document.getElementById(
+                "aboutDish"
+            ).textContent =
+                product.about;
+
+
+            document.getElementById(
+                "productPrice"
+            ).textContent =
+                "₹" + product.price;
+
+
+            document.getElementById(
+                "oldPrice"
+            ).textContent =
+                "₹" + product.oldPrice;
+
+
+            document.getElementById(
+                "productRating"
+            ).textContent =
+                "★ " + product.rating;
+
+
+            document.getElementById(
+                "offerBadge"
+            ).textContent =
+                product.badge;
+
+
+            const discount =
+                Math.round(
+                    (
+                        (
+                            product.oldPrice -
+                            product.price
+                        ) /
+                        product.oldPrice
+                    ) * 100
+                );
+
+
+            document.getElementById(
+                "discountText"
+            ).textContent =
+                discount + "% OFF";
+
+
+            const foodType =
+                document.getElementById(
+                    "foodType"
+                );
+
+
+            if (product.diet === "nonveg") {
+
+                foodType.innerHTML =
+                    "🔴 NON-VEG";
+
+                foodType.classList.add(
+                    "nonveg"
+                );
+
+            } else {
+
+                foodType.innerHTML =
+                    "🟢 VEG";
+
+                foodType.classList.remove(
+                    "nonveg"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           QUANTITY
+        ========================= */
+
+        let quantity = 1;
+
+
+        function changeQuantity(amount) {
+
+            quantity += amount;
+
+
+            if (quantity < 1) {
+
+                quantity = 1;
+
+            }
+
+
+            if (quantity > 20) {
+
+                quantity = 20;
+
+            }
+
+
+            document.getElementById(
+                "quantity"
+            ).textContent =
+                quantity;
+
+        }
+
+
+        /* =========================
+           CUSTOMIZATION PRICE
+        ========================= */
+
+        function getCustomizationPrice() {
+
+            let extra = 0;
+
+
+            document
+                .querySelectorAll(
+                    ".custom-option input:checked"
+                )
+                .forEach(input => {
+
+                    extra +=
+                        Number(
+                            input.dataset.price
+                        ) || 0;
+
+                });
+
+
+            return extra;
+
+        }
+
+
+        /* =========================
+           GET CUSTOMIZATIONS
+        ========================= */
+
+        function getCustomizations() {
+
+            const selected = [];
+
+
+            document
+                .querySelectorAll(
+                    ".custom-option input:checked"
+                )
+                .forEach(input => {
+
+                    selected.push(
+                        input.value
+                    );
+
+                });
+
+
+            return selected;
+
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================= */
+
+        function addToCart() {
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "freshBiteCart"
+                    )
+                ) || [];
+
+
+            const extra =
+                getCustomizationPrice();
+
+
+            const customizations =
+                getCustomizations();
+
+
+            const finalPrice =
+                product.price + extra;
+
+
+            const customizationText =
+                customizations.length
+                    ? " (" +
+                      customizations.join(", ") +
+                      ")"
+                    : "";
+
+
+            const cartName =
+                product.name +
+                customizationText;
+
+
+            const existingItem =
+                cart.find(
+                    item =>
+                        item.name === cartName
+                );
+
+
+            if (existingItem) {
+
+                existingItem.quantity =
+                    (
+                        Number(
+                            existingItem.quantity
+                        ) || 1
+                    ) + quantity;
+
+            } else {
+
+                cart.push({
+
+                    name: cartName,
+
+                    price: finalPrice,
+
+                    image: product.image,
+
+                    quantity: quantity
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "freshBiteCart",
+                JSON.stringify(cart)
+            );
+
+
+            updateCartCount();
+
+
+            showToast(
+                product.name +
+                " added to cart"
+            );
+
+        }
+
+
+        /* =========================
+           BUY NOW
+        ========================= */
+
+        function buyNow() {
+
+            addToCart();
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "cart.html";
+
+            }, 500);
+
+        }
+
+
+        /* =========================
+           CART COUNT
+        ========================= */
+
+        function updateCartCount() {
+
+            const cart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "freshBiteCart"
+                    )
+                ) || [];
+
+
+            let count = 0;
+
+
+            cart.forEach(item => {
+
+                count +=
+                    Number(
+                        item.quantity
+                    ) || 1;
+
+            });
+
+
+            document.getElementById(
+                "cartCount"
+            ).textContent =
+                count;
+
+        }
+
+
+        /* =========================
+           WISHLIST
+        ========================= */
+
+        function toggleWishlist() {
+
+            const button =
+                document.getElementById(
+                    "wishlistButton"
+                );
+
+
+            const icon =
+                document.getElementById(
+                    "wishlistIcon"
+                );
+
+
+            button.classList.toggle(
+                "active"
+            );
+
+
+            if (
+                button.classList.contains(
+                    "active"
+                )
+            ) {
+
+                icon.classList.remove(
+                    "fa-regular"
+                );
+
+                icon.classList.add(
+                    "fa-solid"
+                );
+
+                showToast(
+                    "Added to wishlist"
+                );
+
+            } else {
+
+                icon.classList.remove(
+                    "fa-solid"
+                );
+
+                icon.classList.add(
+                    "fa-regular"
+                );
+
+                showToast(
+                    "Removed from wishlist"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            document.getElementById(
+                "toastMessage"
+            ).textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 2200);
+
+        }
+
+
+        /* =========================
+           RELATED PRODUCTS
+        ========================= */
+
+        function loadRelatedProducts() {
+
+            const grid =
+                document.getElementById(
+                    "relatedGrid"
+                );
+
+
+            const related =
+                Object.entries(products)
+                    .filter(
+                        ([key, item]) =>
+                            key !== productKey &&
+                            item.category ===
+                            product.category
+                    )
+                    .slice(0, 4);
+
+
+            let html = "";
+
+
+            related.forEach(
+                ([key, item]) => {
+
+                    html += `
+
+                        <a
+                            href="product.html?item=${key}"
+                            class="related-card">
+
+                            <img
+                                src="${item.image}"
+                                class="related-image"
+                                alt="${item.name}">
+
+                            <div class="related-content">
+
+                                <div class="related-name">
+                                    ${item.name}
+                                </div>
+
+                                <span class="related-rating">
+                                    ★ ${item.rating}
+                                </span>
+
+                                <div class="related-price">
+                                    ₹${item.price}
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    `;
+
+                }
+            );
+
+
+            grid.innerHTML = html;
+
+
+            if (!related.length) {
+
+                const otherProducts =
+                    Object.entries(products)
+                        .filter(
+                            ([key]) =>
+                                key !== productKey
+                        )
+                        .slice(0, 4);
+
+
+                otherProducts.forEach(
+                    ([key, item]) => {
+
+                        grid.innerHTML += `
+
+                            <a
+                                href="product.html?item=${key}"
+                                class="related-card">
+
+                                <img
+                                    src="${item.image}"
+                                    class="related-image"
+                                    alt="${item.name}">
+
+                                <div class="related-content">
+
+                                    <div class="related-name">
+                                        ${item.name}
+                                    </div>
+
+                                    <span class="related-rating">
+                                        ★ ${item.rating}
+                                    </span>
+
+                                    <div class="related-price">
+                                        ₹${item.price}
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        `;
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           INITIALIZE
+        ========================= */
+
+        loadProduct();
+
+        loadRelatedProducts();
+
+        updateCartCount();
+
+    </script>
+
+
+</body>
+
+</html>

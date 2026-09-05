@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurants | FreshBite</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff8f0;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 248, 240, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1dfcf;
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff6b35;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            background: #ff6b35;
+            color: white;
+            border-radius: 13px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #ff6b35;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid #ead7c6;
+            background: white;
+            display: grid;
+            place-items: center;
+            color: #2d1b12;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        .cart-count {
+            position: absolute;
+            right: -5px;
+            top: -6px;
+            width: 19px;
+            height: 19px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #2d1b12;
+            color: white;
+            font-size: 10px;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================== */
+
+        .page-header {
+            padding: 55px 0 30px;
+        }
+
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #ff6b35;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(34px, 5vw, 50px);
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #806f64;
+            font-size: 14px;
+            max-width: 650px;
+        }
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        .search-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #927d70;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 54px;
+            padding: 0 20px 0 50px;
+            border: 1px solid #ead7c6;
+            border-radius: 15px;
+            background: white;
+            outline: none;
+            font-size: 13px;
+            color: #2d1b12;
+        }
+
+        .search-box input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.08);
+        }
+
+        .filter-btn {
+            height: 54px;
+            padding: 0 22px;
+            background: #2d1b12;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #ff6b35;
+        }
+
+        /* =========================
+           FILTER PANEL
+        ========================== */
+
+        .filter-panel {
+            display: none;
+            background: white;
+            border: 1px solid #ead7c6;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(45, 27, 18, 0.06);
+        }
+
+        .filter-panel.show {
+            display: block;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #ead7c6;
+            border-radius: 10px;
+            background: #fff8f0;
+            color: #2d1b12;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .clear-filters {
+            margin-top: 18px;
+            border: none;
+            background: transparent;
+            color: #ff6b35;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        /* =========================
+           CATEGORIES
+        ========================== */
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 35px;
+        }
+
+        .categories::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .category-btn {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            border-radius: 50px;
+            border: 1px solid #ead7c6;
+            background: white;
+            color: #5d4b42;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        /* =========================
+           RESULTS HEADER
+        ========================== */
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .results-header h2 {
+            font-size: 22px;
+        }
+
+        .results-count {
+            color: #806f64;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .sort-select {
+            padding: 10px 14px;
+            border: 1px solid #ead7c6;
+            border-radius: 10px;
+            background: white;
+            color: #2d1b12;
+            outline: none;
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESTAURANTS
+        ========================== */
+
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .restaurant-card {
+            background: white;
+            border: 1px solid #f0ded0;
+            border-radius: 22px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(45, 27, 18, 0.1);
+        }
+
+        .restaurant-image {
+            height: 210px;
+            position: relative;
+        }
+
+        .restaurant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .offer {
+            position: absolute;
+            left: 14px;
+            bottom: 14px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: #ff6b35;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .delivery-badge {
+            position: absolute;
+            left: 14px;
+            top: 14px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(45, 27, 18, 0.88);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .heart {
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            color: #2d1b12;
+            transition: 0.3s;
+            z-index: 5;
+        }
+
+        .heart:hover {
+            color: #ff6b35;
+            transform: scale(1.08);
+        }
+
+        .heart.liked {
+            color: #e53935;
+        }
+
+        .restaurant-content {
+            padding: 18px;
+        }
+
+        .restaurant-content h3 {
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .restaurant-content p {
+            color: #806f64;
+            font-size: 12px;
+            margin-bottom: 13px;
+        }
+
+        .restaurant-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 11px;
+            color: #66544a;
+            margin-bottom: 15px;
+        }
+
+        .rating {
+            color: #e69a00;
+            font-weight: 700;
+        }
+
+        .restaurant-extra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 13px;
+            border-top: 1px solid #f3e7de;
+            margin-bottom: 13px;
+        }
+
+        .distance {
+            color: #806f64;
+            font-size: 11px;
+        }
+
+        .veg-tag {
+            color: #258a3d;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .nonveg-tag {
+            color: #d32f2f;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 11px;
+            background: #ff6b35;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .menu-btn:hover {
+            background: #e95725;
+        }
+
+        /* =========================
+           NO RESULTS
+        ========================== */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 70px 20px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #f0ded0;
+        }
+
+        .no-results i {
+            font-size: 42px;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+
+        .no-results h3 {
+            margin-bottom: 7px;
+        }
+
+        .no-results p {
+            color: #806f64;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 80px;
+            background: #2d1b12;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-content p {
+            color: #cdbdb3;
+            font-size: 12px;
+        }
+
+        footer .logo {
+            color: white;
+        }
+
+        footer .logo-icon {
+            background: #ff6b35;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 1000px) {
+            .filter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .restaurant-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                min-height: 65px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .page-header {
+                padding-top: 35px;
+            }
+
+            .search-area {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-image {
+                height: 220px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header>
+
+        <div class="container navbar">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </span>
+
+                FreshBite
+
+            </a>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="restaurants.html" class="active">Restaurants</a>
+                </li>
+
+                <li>
+                    <a href="menu.html">Menu</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <a href="cart.html" class="icon-btn">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <span class="cart-count" id="cartCount">0</span>
+
+                </a>
+
+                <a href="login.html" class="icon-btn">
+
+                    <i class="fa-regular fa-user"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main>
+
+        <div class="container">
+
+            <!-- PAGE HEADER -->
+
+            <section class="page-header">
+
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bangalore
+                </div>
+
+                <h1>Find your next favourite meal 🍽️</h1>
+
+                <p>
+                    Explore top-rated restaurants, discover great offers,
+                    and get delicious food delivered to your doorstep.
+                </p>
+
+            </section>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-area">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search restaurants or cuisines..."
+                    >
+
+                </div>
+
+                <button class="filter-btn" id="filterBtn">
+
+                    <i class="fa-solid fa-sliders"></i>
+                    Filters
+
+                </button>
+
+            </div>
+
+
+            <!-- FILTER PANEL -->
+
+            <div class="filter-panel" id="filterPanel">
+
+                <div class="filter-grid">
+
+                    <div class="filter-group">
+
+                        <label>Rating</label>
+
+                        <select class="filter-select" id="ratingFilter">
+
+                            <option value="all">Any Rating</option>
+                            <option value="4">4.0+ Rating</option>
+                            <option value="4.5">4.5+ Rating</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label>Delivery</label>
+
+                        <select class="filter-select" id="deliveryFilter">
+
+                            <option value="all">Any Time</option>
+                            <option value="30">Under 30 min</option>
+                            <option value="40">Under 40 min</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label>Food Type</label>
+
+                        <select class="filter-select" id="foodFilter">
+
+                            <option value="all">All</option>
+                            <option value="veg">Pure Veg</option>
+                            <option value="nonveg">Non-Veg</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label>Offers</label>
+
+                        <select class="filter-select" id="offerFilter">
+
+                            <option value="all">All Restaurants</option>
+                            <option value="yes">Offers Available</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button class="clear-filters" id="clearFilters">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Clear all filters
+                </button>
+
+            </div>
+
+
+            <!-- CATEGORIES -->
+
+            <div class="categories">
+
+                <button class="category-btn active" data-category="all">
+                    All
+                </button>
+
+                <button class="category-btn" data-category="Pizza">
+                    🍕 Pizza
+                </button>
+
+                <button class="category-btn" data-category="Burgers">
+                    🍔 Burgers
+                </button>
+
+                <button class="category-btn" data-category="Asian">
+                    🍜 Asian
+                </button>
+
+                <button class="category-btn" data-category="Indian">
+                    🍛 Indian
+                </button>
+
+                <button class="category-btn" data-category="Mexican">
+                    🌮 Mexican
+                </button>
+
+                <button class="category-btn" data-category="Desserts">
+                    🍰 Desserts
+                </button>
+
+                <button class="category-btn" data-category="Healthy">
+                    🥗 Healthy
+                </button>
+
+            </div>
+
+
+            <!-- RESULTS HEADER -->
+
+            <div class="results-header">
+
+                <div>
+
+                    <h2>Popular Restaurants</h2>
+
+                    <div class="results-count" id="resultsCount">
+                        8 restaurants found
+                    </div>
+
+                </div>
+
+                <select class="sort-select" id="sortSelect">
+
+                    <option value="recommended">Recommended</option>
+                    <option value="rating">Top Rated</option>
+                    <option value="delivery">Fastest Delivery</option>
+                    <option value="priceLow">Lowest Price</option>
+                    <option value="priceHigh">Highest Price</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- RESTAURANT GRID -->
+
+            <div class="restaurant-grid" id="restaurantGrid">
+
+
+                <!-- 1 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Urban Slice"
+                    data-category="Pizza"
+                    data-rating="4.8"
+                    data-delivery="28"
+                    data-price="600"
+                    data-food="veg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=85"
+                            alt="Urban Slice Pizza"
+                        >
+
+                        <span class="delivery-badge">
+                            ⚡ Fast Delivery
+                        </span>
+
+                        <span class="offer">
+                            20% OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Urban Slice</h3>
+
+                        <p>
+                            Pizza • Italian • Fast Food
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.8
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                25–30 min
+                            </span>
+
+                            <span>₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                1.2 km
+                            </span>
+
+                            <span class="veg-tag">
+                                ● PURE VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 2 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Burger House"
+                    data-category="Burgers"
+                    data-rating="4.7"
+                    data-delivery="23"
+                    data-price="500"
+                    data-food="nonveg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=85"
+                            alt="Burger House"
+                        >
+
+                        <span class="delivery-badge">
+                            ⚡ 20–25 min
+                        </span>
+
+                        <span class="offer">
+                            FREE DELIVERY
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Burger House</h3>
+
+                        <p>
+                            Burgers • American • Beverages
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.7
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                20–25 min
+                            </span>
+
+                            <span>₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                1.8 km
+                            </span>
+
+                            <span class="nonveg-tag">
+                                ● NON-VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 3 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Spice Garden"
+                    data-category="Indian"
+                    data-rating="4.9"
+                    data-delivery="34"
+                    data-price="700"
+                    data-food="veg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+                            alt="Indian food"
+                        >
+
+                        <span class="offer">
+                            15% OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Spice Garden</h3>
+
+                        <p>
+                            Indian • North Indian • Biryani
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.9
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                30–35 min
+                            </span>
+
+                            <span>₹₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                2.1 km
+                            </span>
+
+                            <span class="veg-tag">
+                                ● PURE VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 4 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Sushi Story"
+                    data-category="Asian"
+                    data-rating="4.6"
+                    data-delivery="38"
+                    data-price="1000"
+                    data-food="nonveg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=900&q=85"
+                            alt="Sushi"
+                        >
+
+                        <span class="offer">
+                            10% OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Sushi Story</h3>
+
+                        <p>
+                            Japanese • Sushi • Asian
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.6
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                35–40 min
+                            </span>
+
+                            <span>₹₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                3.2 km
+                            </span>
+
+                            <span class="nonveg-tag">
+                                ● NON-VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 5 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Sweet Cravings"
+                    data-category="Desserts"
+                    data-rating="4.8"
+                    data-delivery="18"
+                    data-price="350"
+                    data-food="veg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=85"
+                            alt="Desserts"
+                        >
+
+                        <span class="delivery-badge">
+                            ⚡ Super Fast
+                        </span>
+
+                        <span class="offer">
+                            BUY 1 GET 1
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Sweet Cravings</h3>
+
+                        <p>
+                            Desserts • Cakes • Ice Cream
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.8
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                15–20 min
+                            </span>
+
+                            <span>₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                0.9 km
+                            </span>
+
+                            <span class="veg-tag">
+                                ● PURE VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 6 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Green Bowl"
+                    data-category="Healthy"
+                    data-rating="4.7"
+                    data-delivery="24"
+                    data-price="550"
+                    data-food="veg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85"
+                            alt="Healthy food"
+                        >
+
+                        <span class="delivery-badge">
+                            🌱 Healthy Choice
+                        </span>
+
+                        <span class="offer">
+                            20% OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Green Bowl</h3>
+
+                        <p>
+                            Healthy • Salads • Vegan
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.7
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                20–25 min
+                            </span>
+
+                            <span>₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                1.5 km
+                            </span>
+
+                            <span class="veg-tag">
+                                ● PURE VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 7 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Taco Fiesta"
+                    data-category="Mexican"
+                    data-rating="4.5"
+                    data-delivery="29"
+                    data-price="650"
+                    data-food="nonveg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=900&q=85"
+                            alt="Mexican tacos"
+                        >
+
+                        <span class="offer">
+                            ₹150 OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Taco Fiesta</h3>
+
+                        <p>
+                            Mexican • Tacos • Fast Food
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.5
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                25–30 min
+                            </span>
+
+                            <span>₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                2.4 km
+                            </span>
+
+                            <span class="nonveg-tag">
+                                ● NON-VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 8 -->
+
+                <article
+                    class="restaurant-card"
+                    data-name="Royal Biryani"
+                    data-category="Indian"
+                    data-rating="4.6"
+                    data-delivery="31"
+                    data-price="750"
+                    data-food="nonveg"
+                    data-offer="yes"
+                >
+
+                    <div class="restaurant-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=85"
+                            alt="Biryani"
+                        >
+
+                        <span class="offer">
+                            25% OFF
+                        </span>
+
+                        <button class="heart" onclick="toggleHeart(event, this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="restaurant-content">
+
+                        <h3>Royal Biryani</h3>
+
+                        <p>
+                            Indian • Biryani • Mughlai
+                        </p>
+
+                        <div class="restaurant-info">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.6
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                30–35 min
+                            </span>
+
+                            <span>₹₹₹</span>
+
+                        </div>
+
+                        <div class="restaurant-extra">
+
+                            <span class="distance">
+                                <i class="fa-solid fa-location-dot"></i>
+                                2.7 km
+                            </span>
+
+                            <span class="nonveg-tag">
+                                ● NON-VEG
+                            </span>
+
+                        </div>
+
+                        <a href="menu.html" class="menu-btn">
+                            View Menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- NO RESULTS -->
+
+            <div class="no-results" id="noResults">
+
+                <i class="fa-solid fa-face-sad-tear"></i>
+
+                <h3>No restaurants found</h3>
+
+                <p>
+                    Try another restaurant, cuisine, or filter.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </span>
+
+                FreshBite
+
+            </div>
+
+            <p>
+                © 2026 FreshBite. Delicious food, delivered with care.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           CART COUNT
+        ========================== */
+
+        function updateCartCount() {
+
+            const cart = JSON.parse(
+                localStorage.getItem("freshBiteCart") || "[]"
+            );
+
+            let count = 0;
+
+            cart.forEach(item => {
+                count += Number(item.quantity || 1);
+            });
+
+            const cartCount = document.getElementById("cartCount");
+
+            if (cartCount) {
+                cartCount.textContent = count;
+            }
+        }
+
+        updateCartCount();
+
+
+        /* =========================
+           VARIABLES
+        ========================== */
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const restaurantGrid =
+            document.getElementById("restaurantGrid");
+
+        const resultsCount =
+            document.getElementById("resultsCount");
+
+        const noResults =
+            document.getElementById("noResults");
+
+        const categoryButtons =
+            document.querySelectorAll(".category-btn");
+
+        const filterBtn =
+            document.getElementById("filterBtn");
+
+        const filterPanel =
+            document.getElementById("filterPanel");
+
+        const ratingFilter =
+            document.getElementById("ratingFilter");
+
+        const deliveryFilter =
+            document.getElementById("deliveryFilter");
+
+        const foodFilter =
+            document.getElementById("foodFilter");
+
+        const offerFilter =
+            document.getElementById("offerFilter");
+
+        const sortSelect =
+            document.getElementById("sortSelect");
+
+        const clearFilters =
+            document.getElementById("clearFilters");
+
+        let selectedCategory = "all";
+
+
+        /* =========================
+           FILTER PANEL
+        ========================== */
+
+        filterBtn.addEventListener("click", function () {
+
+            filterPanel.classList.toggle("show");
+
+            this.classList.toggle("active");
+
+        });
+
+
+        /* =========================
+           CATEGORY FILTER
+        ========================== */
+
+        categoryButtons.forEach(button => {
+
+            button.addEventListener("click", function () {
+
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+                selectedCategory =
+                    this.dataset.category;
+
+                applyFilters();
+
+            });
+
+        });
+
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        searchInput.addEventListener("input", function () {
+            applyFilters();
+        });
+
+
+        /* =========================
+           DROPDOWN FILTERS
+        ========================== */
+
+        ratingFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+        deliveryFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+        foodFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+        offerFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+
+        /* =========================
+           SORT
+        ========================== */
+
+        sortSelect.addEventListener("change", function () {
+
+            const cards = [
+                ...document.querySelectorAll(".restaurant-card")
+            ];
+
+            const value = this.value;
+
+            cards.sort((a, b) => {
+
+                if (value === "rating") {
+
+                    return (
+                        Number(b.dataset.rating) -
+                        Number(a.dataset.rating)
+                    );
+
+                }
+
+                if (value === "delivery") {
+
+                    return (
+                        Number(a.dataset.delivery) -
+                        Number(b.dataset.delivery)
+                    );
+
+                }
+
+                if (value === "priceLow") {
+
+                    return (
+                        Number(a.dataset.price) -
+                        Number(b.dataset.price)
+                    );
+
+                }
+
+                if (value === "priceHigh") {
+
+                    return (
+                        Number(b.dataset.price) -
+                        Number(a.dataset.price)
+                    );
+
+                }
+
+                return 0;
+
+            });
+
+            cards.forEach(card => {
+                restaurantGrid.appendChild(card);
+            });
+
+            applyFilters();
+
+        });
+
+
+        /* =========================
+           MAIN FILTER FUNCTION
+        ========================== */
+
+        function applyFilters() {
+
+            const searchValue =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            const minRating =
+                ratingFilter.value === "all"
+                    ? 0
+                    : Number(ratingFilter.value);
+
+            const maxDelivery =
+                deliveryFilter.value === "all"
+                    ? Infinity
+                    : Number(deliveryFilter.value);
+
+            const selectedFood =
+                foodFilter.value;
+
+            const selectedOffer =
+                offerFilter.value;
+
+            const cards =
+                document.querySelectorAll(".restaurant-card");
+
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+
+                const name =
+                    card.dataset.name.toLowerCase();
+
+                const category =
+                    card.dataset.category.toLowerCase();
+
+                const rating =
+                    Number(card.dataset.rating);
+
+                const delivery =
+                    Number(card.dataset.delivery);
+
+                const food =
+                    card.dataset.food;
+
+                const offer =
+                    card.dataset.offer;
+
+
+                const searchMatch =
+                    name.includes(searchValue) ||
+                    category.includes(searchValue);
+
+
+                const categoryMatch =
+                    selectedCategory === "all" ||
+                    card.dataset.category === selectedCategory;
+
+
+                const ratingMatch =
+                    rating >= minRating;
+
+
+                const deliveryMatch =
+                    delivery <= maxDelivery;
+
+
+                const foodMatch =
+                    selectedFood === "all" ||
+                    food === selectedFood;
+
+
+                const offerMatch =
+                    selectedOffer === "all" ||
+                    offer === "yes";
+
+
+                if (
+                    searchMatch &&
+                    categoryMatch &&
+                    ratingMatch &&
+                    deliveryMatch &&
+                    foodMatch &&
+                    offerMatch
+                ) {
+
+                    card.style.display = "block";
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            resultsCount.textContent =
+                visibleCount +
+                (visibleCount === 1
+                    ? " restaurant found"
+                    : " restaurants found");
+
+
+            if (visibleCount === 0) {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
+
+        }
+
+
+        /* =========================
+           CLEAR FILTERS
+        ========================== */
+
+        clearFilters.addEventListener("click", function () {
+
+            searchInput.value = "";
+
+            ratingFilter.value = "all";
+
+            deliveryFilter.value = "all";
+
+            foodFilter.value = "all";
+
+            offerFilter.value = "all";
+
+            sortSelect.value = "recommended";
+
+            selectedCategory = "all";
+
+            categoryButtons.forEach(button => {
+                button.classList.remove("active");
+            });
+
+            categoryButtons[0].classList.add("active");
+
+            applyFilters();
+
+        });
+
+
+        /* =========================
+           HEART / WISHLIST
+        ========================== */
+
+        function toggleHeart(event, button) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const icon =
+                button.querySelector("i");
+
+            button.classList.toggle("liked");
+
+            if (
+                icon.classList.contains("fa-regular")
+            ) {
+
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+
+            } else {
+
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+
+            }
+
+        }
+
+
+        /* =========================
+           INITIAL FILTER
+        ========================== */
+
+        applyFilters();
+
+    </script>
+
+</body>
+
+</html>

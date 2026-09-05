@@ -1,0 +1,1359 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Login / Register - FreshBite</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff8f0;
+            color: #2d1b12;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #2d1b12;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2d1b12;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff3eb;
+            color: #ff6b35;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+
+            width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+            background: #ff6b35;
+            color: white;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 22px;
+            color: #2d1b12;
+            cursor: pointer;
+        }
+
+        /* ================= MAIN ================= */
+
+        .auth-section {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 1000px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+
+            box-shadow: 0 15px 50px rgba(45, 27, 18, 0.12);
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .auth-image {
+            background: #ff6b35;
+            color: white;
+
+            padding: 50px 40px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-image::before {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            top: -80px;
+            right: -80px;
+        }
+
+        .auth-image::after {
+            content: "";
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            bottom: -70px;
+            left: -60px;
+        }
+
+        .food-icon {
+            width: 80px;
+            height: 80px;
+
+            border-radius: 20px;
+
+            background: white;
+            color: #ff6b35;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 38px;
+
+            margin-bottom: 25px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-image h1 {
+            font-size: 35px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-image p {
+            color: #fff4ed;
+            line-height: 1.8;
+            font-size: 14px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits {
+            margin-top: 30px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 13px;
+        }
+
+        .benefit i {
+            width: 28px;
+            height: 28px;
+
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= FORM SIDE ================= */
+
+        .auth-form {
+            padding: 45px 45px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-header h2 {
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* ================= TABS ================= */
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: #fff3eb;
+            padding: 5px;
+
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #777;
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #ff6b35;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ================= FORMS ================= */
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 17px;
+        }
+
+        .input-group label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 7px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+
+            padding: 13px 42px;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+            font-size: 13px;
+
+            color: #2d1b12;
+
+            transition: 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #ff6b35;
+
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.10);
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #999;
+
+            cursor: pointer;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 20px;
+
+            font-size: 11px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            color: #666;
+        }
+
+        .remember input {
+            accent-color: #ff6b35;
+        }
+
+        .forgot {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            background: #ff6b35;
+            color: white;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .auth-btn:hover {
+            background: #e95724;
+            transform: translateY(-1px);
+        }
+
+        .switch-text {
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 12px;
+            color: #777;
+        }
+
+        .switch-text button {
+            border: none;
+            background: transparent;
+
+            color: #ff6b35;
+
+            font-family: inherit;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .terms {
+            text-align: center;
+
+            font-size: 10px;
+            color: #999;
+
+            margin-top: 18px;
+            line-height: 1.6;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+
+            bottom: 25px;
+            right: 25px;
+
+            background: #2d1b12;
+            color: white;
+
+            padding: 14px 20px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+            transform: translateY(100px);
+            opacity: 0;
+
+            transition: 0.3s;
+
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left: 4px solid #36b37e;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ff4d4d;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+
+                position: absolute;
+
+                top: 70px;
+                left: 0;
+                right: 0;
+
+                background: white;
+
+                padding: 20px;
+
+                flex-direction: column;
+                align-items: flex-start;
+
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .auth-wrapper {
+                max-width: 600px;
+                grid-template-columns: 1fr;
+            }
+
+            .auth-image {
+                padding: 35px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .auth-image h1 {
+                font-size: 28px;
+            }
+
+            .benefits {
+                display: none;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .nav-container {
+                padding: 13px 15px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .auth-section {
+                padding: 25px 12px;
+            }
+
+            .auth-wrapper {
+                border-radius: 18px;
+            }
+
+            .auth-image {
+                padding: 30px 20px;
+            }
+
+            .food-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 28px;
+                margin-bottom: 18px;
+            }
+
+            .auth-image h1 {
+                font-size: 24px;
+            }
+
+            .auth-image p {
+                font-size: 12px;
+            }
+
+            .auth-form {
+                padding: 30px 20px;
+            }
+
+            .form-header h2 {
+                font-size: 23px;
+            }
+
+            .toast {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Fresh<span>Bite</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a href="cart.html" class="icon-btn" title="View Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= AUTH SECTION ================= -->
+
+    <main class="auth-section">
+
+        <div class="auth-wrapper">
+
+            <!-- LEFT SIDE -->
+
+            <section class="auth-image">
+
+                <div class="food-icon">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+
+                <h1>
+                    Good food.<br>
+                    Good mood.
+                </h1>
+
+                <p>
+                    Login or create your FreshBite account
+                    and enjoy delicious food delivered
+                    straight to your door.
+                </p>
+
+                <div class="benefits">
+
+                    <div class="benefit">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Fast & easy food ordering</span>
+                    </div>
+
+                    <div class="benefit">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Save your favourite foods</span>
+                    </div>
+
+                    <div class="benefit">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Track your orders easily</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RIGHT SIDE -->
+
+            <section class="auth-form">
+
+                <div class="form-header">
+
+                    <h2 id="formTitle">Welcome Back!</h2>
+
+                    <p id="formSubtitle">
+                        Login to continue ordering delicious food.
+                    </p>
+
+                </div>
+
+
+                <!-- TABS -->
+
+                <div class="auth-tabs">
+
+                    <button class="tab-btn active" id="loginTab">
+                        Login
+                    </button>
+
+                    <button class="tab-btn" id="registerTab">
+                        Register
+                    </button>
+
+                </div>
+
+
+                <!-- ================= LOGIN FORM ================= -->
+
+                <div class="form-container active" id="loginForm">
+
+                    <form id="loginFormElement">
+
+                        <div class="input-group">
+
+                            <label for="loginEmail">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="loginEmail"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="loginPassword">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    placeholder="Enter your password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('loginPassword', this)"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-options">
+
+                            <label class="remember">
+                                <input type="checkbox" id="rememberMe">
+                                Remember me
+                            </label>
+
+                            <a href="#" class="forgot"
+                                onclick="forgotPassword(event)">
+                                Forgot password?
+                            </a>
+
+                        </div>
+
+
+                        <button type="submit" class="auth-btn">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            &nbsp; Login
+                        </button>
+
+                    </form>
+
+
+                    <div class="switch-text">
+
+                        Don't have an account?
+
+                        <button onclick="showRegister()">
+                            Create Account
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= REGISTER FORM ================= -->
+
+                <div class="form-container" id="registerForm">
+
+                    <form id="registerFormElement">
+
+                        <div class="input-group">
+
+                            <label for="registerName">
+                                Full Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="registerName"
+                                    placeholder="Enter your full name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="registerEmail">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="registerEmail"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="registerPassword">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="registerPassword"
+                                    placeholder="Create a password"
+                                    minlength="6"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('registerPassword', this)"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-shield-halved"></i>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="Confirm your password"
+                                    minlength="6"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('confirmPassword', this)"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="auth-btn">
+                            <i class="fa-solid fa-user-plus"></i>
+                            &nbsp; Create Account
+                        </button>
+
+                    </form>
+
+
+                    <div class="switch-text">
+
+                        Already have an account?
+
+                        <button onclick="showLogin()">
+                            Login
+                        </button>
+
+                    </div>
+
+                    <p class="terms">
+                        By creating an account, you agree to our
+                        Terms & Conditions and Privacy Policy.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div class="toast" id="toast"></div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= NAVBAR ================= */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+        });
+
+
+        /* ================= CART COUNT ================= */
+
+        function updateCartCount() {
+
+            const cart = JSON.parse(
+                localStorage.getItem("freshBiteCart")
+            ) || [];
+
+            const count = cart.reduce(
+                (total, item) => total + Number(item.quantity || 1),
+                0
+            );
+
+            document.getElementById("cartCount").textContent = count;
+        }
+
+        updateCartCount();
+
+
+        /* ================= TAB SWITCHING ================= */
+
+        const loginTab = document.getElementById("loginTab");
+        const registerTab = document.getElementById("registerTab");
+
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+
+        const formTitle = document.getElementById("formTitle");
+        const formSubtitle = document.getElementById("formSubtitle");
+
+
+        function showLogin() {
+
+            loginTab.classList.add("active");
+            registerTab.classList.remove("active");
+
+            loginForm.classList.add("active");
+            registerForm.classList.remove("active");
+
+            formTitle.textContent = "Welcome Back!";
+
+            formSubtitle.textContent =
+                "Login to continue ordering delicious food.";
+        }
+
+
+        function showRegister() {
+
+            registerTab.classList.add("active");
+            loginTab.classList.remove("active");
+
+            registerForm.classList.add("active");
+            loginForm.classList.remove("active");
+
+            formTitle.textContent = "Create Account";
+
+            formSubtitle.textContent =
+                "Join FreshBite and start ordering today.";
+        }
+
+
+        loginTab.addEventListener("click", showLogin);
+
+        registerTab.addEventListener("click", showRegister);
+
+
+        /* ================= TOAST ================= */
+
+        function showToast(message, type = "success") {
+
+            const toast = document.getElementById("toast");
+
+            toast.textContent = message;
+
+            toast.className = "toast show " + type;
+
+            setTimeout(function () {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+
+        /* ================= PASSWORD TOGGLE ================= */
+
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            const icon = button.querySelector("i");
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+        }
+
+
+        /* ================= REGISTER ================= */
+
+        document
+            .getElementById("registerFormElement")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const name =
+                    document.getElementById("registerName").value.trim();
+
+                const email =
+                    document.getElementById("registerEmail").value.trim();
+
+                const password =
+                    document.getElementById("registerPassword").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+
+                if (name.length < 2) {
+
+                    showToast(
+                        "Please enter your full name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    showToast(
+                        "Password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (password !== confirmPassword) {
+
+                    showToast(
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const existingUser =
+                    JSON.parse(
+                        localStorage.getItem("freshBiteUser")
+                    );
+
+
+                if (
+                    existingUser &&
+                    existingUser.email.toLowerCase() ===
+                    email.toLowerCase()
+                ) {
+
+                    showToast(
+                        "An account with this email already exists.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const user = {
+
+                    name: name,
+
+                    email: email,
+
+                    password: password,
+
+                    createdAt: new Date().toISOString()
+
+                };
+
+
+                localStorage.setItem(
+                    "freshBiteUser",
+                    JSON.stringify(user)
+                );
+
+
+                localStorage.setItem(
+                    "freshBiteLoggedIn",
+                    "true"
+                );
+
+
+                showToast(
+                    "Account created successfully! 🎉"
+                );
+
+
+                setTimeout(function () {
+
+                    window.location.href = "account.html";
+
+                }, 1200);
+
+            });
+
+
+        /* ================= LOGIN ================= */
+
+        document
+            .getElementById("loginFormElement")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("loginEmail").value.trim();
+
+                const password =
+                    document.getElementById("loginPassword").value;
+
+
+                const savedUser =
+                    JSON.parse(
+                        localStorage.getItem("freshBiteUser")
+                    );
+
+
+                if (!savedUser) {
+
+                    showToast(
+                        "No account found. Please register first.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    savedUser.email.toLowerCase() !==
+                    email.toLowerCase()
+                ) {
+
+                    showToast(
+                        "Incorrect email address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (savedUser.password !== password) {
+
+                    showToast(
+                        "Incorrect password.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                localStorage.setItem(
+                    "freshBiteLoggedIn",
+                    "true"
+                );
+
+
+                showToast(
+                    "Login successful! Welcome back 👋"
+                );
+
+
+                setTimeout(function () {
+
+                    window.location.href = "account.html";
+
+                }, 1200);
+
+            });
+
+
+        /* ================= FORGOT PASSWORD ================= */
+
+        function forgotPassword(event) {
+
+            event.preventDefault();
+
+            const savedUser =
+                JSON.parse(
+                    localStorage.getItem("freshBiteUser")
+                );
+
+
+            if (!savedUser) {
+
+                showToast(
+                    "No account found. Please register first.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            showToast(
+                "Password reset is simulated for this project.",
+                "success"
+            );
+        }
+
+    </script>
+
+</body>
+
+</html>
+```
+

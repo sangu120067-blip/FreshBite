@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FreshBite - Order Tracking</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #2d1b12;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,.07);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 25px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d3c33;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b35;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .cart-link {
+            font-size: 19px;
+        }
+
+        .account-btn {
+            background: #ff6b35;
+            color: white;
+            padding: 9px 17px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .tracking-hero {
+            background:
+                linear-gradient(
+                    120deg,
+                    #2d1b12,
+                    #4a2b1c
+                );
+
+            color: white;
+            padding: 42px 20px 50px;
+            text-align: center;
+        }
+
+        .tracking-hero .success-icon {
+            width: 65px;
+            height: 65px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            font-size: 27px;
+        }
+
+        .tracking-hero h1 {
+            font-size: 29px;
+            margin-bottom: 6px;
+        }
+
+        .tracking-hero p {
+            color: #ded2ca;
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1180px;
+            margin: auto;
+            padding: 30px 20px 70px;
+        }
+
+
+        /* =========================
+           ORDER TOP CARD
+        ========================= */
+
+        .order-top {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 18px;
+            padding: 20px 23px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .order-label {
+            color: #888;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .order-id {
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 3px;
+        }
+
+        .order-date {
+            font-size: 9px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .status-badge {
+            background: #e8f8ee;
+            color: #218c4d;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .tracking-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 20px;
+        }
+
+        .card-title i {
+            color: #ff6b35;
+        }
+
+        .card-title h2 {
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           ETA
+        ========================= */
+
+        .eta-box {
+            background: linear-gradient(
+                135deg,
+                #fff4ed,
+                #fffaf7
+            );
+
+            border: 1px solid #ffe0d1;
+            border-radius: 13px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .eta-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ff6b35;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .eta-text small {
+            color: #888;
+            font-size: 9px;
+        }
+
+        .eta-text h3 {
+            font-size: 20px;
+            margin-top: 1px;
+        }
+
+        .eta-text p {
+            color: #777;
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           PROGRESS BAR
+        ========================= */
+
+        .progress-area {
+            margin: 25px 5px 5px;
+        }
+
+        .progress-line {
+            height: 5px;
+            background: #eee5df;
+            position: relative;
+            margin: 0 35px;
+        }
+
+        .progress-line::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 72%;
+            height: 100%;
+            background: #ff6b35;
+            border-radius: 10px;
+        }
+
+        .progress-dot {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #ff6b35;
+            background: #ff6b35;
+        }
+
+        .dot-1 {
+            left: 0;
+        }
+
+        .dot-2 {
+            left: 33%;
+        }
+
+        .dot-3 {
+            left: 66%;
+        }
+
+        .dot-4 {
+            right: 0;
+            background: white;
+            box-shadow: 0 0 0 2px #ddd;
+        }
+
+        .timeline-labels {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .timeline-label {
+            font-size: 9px;
+            color: #999;
+        }
+
+        .timeline-label.active {
+            color: #ff6b35;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            margin-top: 25px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            min-height: 75px;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: "";
+            position: absolute;
+            left: 16px;
+            top: 34px;
+            width: 2px;
+            height: 55px;
+            background: #e6ddd7;
+        }
+
+        .timeline-item.completed:not(:last-child)::before {
+            background: #ff6b35;
+        }
+
+        .timeline-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #f0ebe7;
+            color: #aaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .timeline-item.completed .timeline-icon {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .timeline-item.current .timeline-icon {
+            background: #ff6b35;
+            color: white;
+            box-shadow: 0 0 0 5px #ffe6da;
+        }
+
+        .timeline-content h4 {
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .timeline-content p {
+            color: #888;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .timeline-time {
+            color: #aaa;
+            font-size: 8px;
+            margin-top: 4px;
+        }
+
+
+        /* =========================
+           MAP / DELIVERY
+        ========================= */
+
+        .map-box {
+            height: 180px;
+            border-radius: 13px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1eee9,
+                    #e5e0da
+                );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .road {
+            position: absolute;
+            background: #fff;
+            transform: rotate(-18deg);
+        }
+
+        .road.one {
+            width: 120%;
+            height: 35px;
+            top: 55px;
+            left: -10%;
+        }
+
+        .road.two {
+            width: 100%;
+            height: 25px;
+            top: 120px;
+            left: 10%;
+            transform: rotate(22deg);
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b35;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,.18);
+        }
+
+        .restaurant-pin {
+            top: 35px;
+            left: 18%;
+        }
+
+        .home-pin {
+            bottom: 30px;
+            right: 18%;
+        }
+
+        .bike {
+            position: absolute;
+            top: 83px;
+            left: 57%;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #2d1b12;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: moveBike 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveBike {
+
+            from {
+                left: 45%;
+            }
+
+            to {
+                left: 62%;
+            }
+
+        }
+
+
+        /* =========================
+           ITEMS
+        ========================= */
+
+        .food-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0e8e3;
+        }
+
+        .food-item:last-child {
+            border-bottom: none;
+        }
+
+        .food-item img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 9px;
+        }
+
+        .food-info {
+            flex: 1;
+        }
+
+        .food-info strong {
+            display: block;
+            font-size: 10px;
+        }
+
+        .food-info span {
+            color: #888;
+            font-size: 8px;
+        }
+
+        .food-price {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           ADDRESS
+        ========================= */
+
+        .address-box {
+            display: flex;
+            gap: 12px;
+        }
+
+        .address-icon {
+            width: 37px;
+            height: 37px;
+            border-radius: 50%;
+            background: #fff0e8;
+            color: #ff6b35;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .address-info strong {
+            font-size: 11px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .address-info p {
+            color: #777;
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           BILL
+        ========================= */
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #777;
+            margin: 11px 0;
+        }
+
+        .bill-row strong {
+            color: #2d1b12;
+        }
+
+        .bill-row.discount strong {
+            color: #218c4d;
+        }
+
+        .bill-divider {
+            border: none;
+            border-top: 1px solid #eee5df;
+            margin: 15px 0;
+        }
+
+        .bill-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           SUPPORT
+        ========================= */
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .support-btn {
+            border: 1px solid #eaded7;
+            background: white;
+            padding: 12px 8px;
+            border-radius: 9px;
+            text-align: center;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .support-btn:hover {
+            border-color: #ff6b35;
+            background: #fff7f2;
+        }
+
+        .support-btn i {
+            color: #ff6b35;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .support-btn span {
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .primary-btn {
+            background: #ff6b35;
+            color: white;
+            border: 1px solid #ff6b35;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #ff6b35;
+            border: 1px solid #ff6b35;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #2d1b12;
+            color: white;
+            padding: 45px 7% 25px;
+        }
+
+        .footer-grid {
+            max-width: 1180px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand h2 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: #c8b9b0;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        footer h3 {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        footer li a {
+            color: #c8b9b0;
+            font-size: 9px;
+        }
+
+        footer li a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.1);
+            margin-top: 30px;
+            padding-top: 18px;
+            text-align: center;
+            color: #9f9088;
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           NO ORDER
+        ========================= */
+
+        .no-order {
+            max-width: 500px;
+            margin: 80px auto;
+            background: white;
+            border: 1px solid #eee2db;
+            border-radius: 18px;
+            padding: 50px 25px;
+            text-align: center;
+        }
+
+        .no-order i {
+            font-size: 45px;
+            color: #ffb28e;
+            margin-bottom: 15px;
+        }
+
+        .no-order h2 {
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .no-order p {
+            color: #888;
+            font-size: 10px;
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:850px) {
+
+            .tracking-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media(max-width:650px) {
+
+            .navbar {
+                height: auto;
+                padding: 14px 5%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .account-btn {
+                display: none;
+            }
+
+            .order-top {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .order-id {
+                font-size: 15px;
+            }
+
+            .tracking-hero h1 {
+                font-size: 25px;
+            }
+
+            .timeline-label {
+                font-size: 8px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width:420px) {
+
+            .order-top {
+                flex-direction: column;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo">
+
+            <i class="fa-solid fa-bowl-food"></i>
+
+            FreshBite
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a
+                href="contact.html"
+                class="active">
+
+                Contact
+
+            </a>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <a
+                href="cart.html"
+                class="cart-link">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+            </a>
+
+            <a
+                href="account.html"
+                class="account-btn">
+
+                My Account
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ORDER AREA -->
+
+    <div id="orderArea"></div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <h2>
+
+                    <i class="fa-solid fa-bowl-food"></i>
+
+                    FreshBite
+
+                </h2>
+
+                <p>
+
+                    Delicious food from your favourite
+                    restaurants, delivered quickly to
+                    your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="restaurants.html">
+                            Restaurants
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="menu.html">
+                            Menu
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Account
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="account.html">
+                            My Account
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="login.html">
+                            Login
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 FreshBite. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        /* =========================
+           GET ORDER
+        ========================= */
+
+        const order =
+            JSON.parse(
+                localStorage.getItem(
+                    "freshBiteOrder"
+                )
+            );
+
+
+        const orderArea =
+            document.getElementById(
+                "orderArea"
+            );
+
+
+        /* =========================
+           NO ORDER
+        ========================= */
+
+        if (!order) {
+
+            orderArea.innerHTML = `
+
+                <div class="no-order">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <h2>
+                        No Recent Order
+                    </h2>
+
+                    <p>
+                        We couldn't find an active FreshBite order.
+                    </p>
+
+                    <a
+                        href="menu.html"
+                        class="action-btn primary-btn">
+
+                        Browse Menu
+
+                    </a>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           ORDER EXISTS
+        ========================= */
+
+        else {
+
+            const customer =
+                order.customer || {};
+
+
+            const items =
+                order.items || [];
+
+
+            const subtotal =
+                Number(order.subtotal) || 0;
+
+
+            const deliveryFee =
+                Number(order.deliveryFee) || 0;
+
+
+            const tax =
+                Number(order.tax) || 0;
+
+
+            const discount =
+                Number(order.discount) || 0;
+
+
+            const total =
+                Number(order.total) ||
+                (
+                    subtotal +
+                    deliveryFee +
+                    tax -
+                    discount
+                );
+
+
+            const itemCount =
+                items.reduce(
+                    (sum,item) =>
+                        sum +
+                        (Number(item.quantity) || 1),
+                    0
+                );
+
+
+            /* =========================
+               ITEMS HTML
+            ========================= */
+
+            let itemsHTML = "";
+
+
+            items.forEach(item => {
+
+                const quantity =
+                    Number(item.quantity) || 1;
+
+
+                const price =
+                    Number(item.price) || 0;
+
+
+                itemsHTML += `
+
+                    <div class="food-item">
+
+                        <img
+                            src="${item.image}"
+                            alt="${item.name}">
+
+                        <div class="food-info">
+
+                            <strong>
+                                ${item.name}
+                            </strong>
+
+                            <span>
+                                ${quantity} × ₹${price}
+                            </span>
+
+                        </div>
+
+                        <div class="food-price">
+
+                            ₹${price * quantity}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            /* =========================
+               ORDER PAGE
+            ========================= */
+
+            orderArea.innerHTML = `
+
+                <!-- HERO -->
+
+                <section class="tracking-hero">
+
+                    <div class="success-icon">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </div>
+
+                    <h1>
+                        Order Confirmed!
+                    </h1>
+
+                    <p>
+                        Your delicious food is on its way.
+                    </p>
+
+                </section>
+
+
+
+                <main class="container">
+
+
+                    <!-- ORDER TOP -->
+
+                    <div class="order-top">
+
+                        <div>
+
+                            <div class="order-label">
+                                Order ID
+                            </div>
+
+                            <div class="order-id">
+                                #${order.orderId}
+                            </div>
+
+                            <div class="order-date">
+                                ${order.date || "Today"}
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-badge">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            ${order.status || "Order Confirmed"}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="tracking-layout">
+
+
+                        <!-- LEFT -->
+
+                        <div>
+
+
+                            <!-- STATUS -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-location-arrow"></i>
+
+                                    <h2>
+                                        Track Your Order
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="eta-box">
+
+                                    <div class="eta-icon">
+
+                                        <i class="fa-solid fa-motorcycle"></i>
+
+                                    </div>
+
+                                    <div class="eta-text">
+
+                                        <small>
+                                            Estimated delivery
+                                        </small>
+
+                                        <h3>
+                                            25–35 min
+                                        </h3>
+
+                                        <p>
+                                            Our delivery partner is
+                                            preparing your order.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="progress-area">
+
+                                    <div class="progress-line">
+
+                                        <span class="progress-dot dot-1"></span>
+
+                                        <span class="progress-dot dot-2"></span>
+
+                                        <span class="progress-dot dot-3"></span>
+
+                                        <span class="progress-dot dot-4"></span>
+
+                                    </div>
+
+
+                                    <div class="timeline-labels">
+
+                                        <div class="timeline-label active">
+                                            Confirmed
+                                        </div>
+
+                                        <div class="timeline-label active">
+                                            Preparing
+                                        </div>
+
+                                        <div class="timeline-label active">
+                                            On the way
+                                        </div>
+
+                                        <div class="timeline-label">
+                                            Delivered
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="timeline">
+
+
+                                    <div class="timeline-item completed">
+
+                                        <div class="timeline-icon">
+
+                                            <i class="fa-solid fa-check"></i>
+
+                                        </div>
+
+                                        <div class="timeline-content">
+
+                                            <h4>
+                                                Order Confirmed
+                                            </h4>
+
+                                            <p>
+                                                Your order has been
+                                                successfully placed.
+                                            </p>
+
+                                            <div class="timeline-time">
+                                                Just now
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="timeline-item completed">
+
+                                        <div class="timeline-icon">
+
+                                            <i class="fa-solid fa-kitchen-set"></i>
+
+                                        </div>
+
+                                        <div class="timeline-content">
+
+                                            <h4>
+                                                Restaurant is Preparing
+                                            </h4>
+
+                                            <p>
+                                                Your food is being freshly
+                                                prepared.
+                                            </p>
+
+                                            <div class="timeline-time">
+                                                In progress
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="timeline-item current">
+
+                                        <div class="timeline-icon">
+
+                                            <i class="fa-solid fa-motorcycle"></i>
+
+                                        </div>
+
+                                        <div class="timeline-content">
+
+                                            <h4>
+                                                Delivery Partner Assigned
+                                            </h4>
+
+                                            <p>
+                                                Your order will be picked
+                                                up and delivered to you.
+                                            </p>
+
+                                            <div class="timeline-time">
+                                                Coming next
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="timeline-item">
+
+                                        <div class="timeline-icon">
+
+                                            <i class="fa-solid fa-house"></i>
+
+                                        </div>
+
+                                        <div class="timeline-content">
+
+                                            <h4>
+                                                Delivered
+                                            </h4>
+
+                                            <p>
+                                                Enjoy your delicious meal!
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- MAP -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-map-location-dot"></i>
+
+                                    <h2>
+                                        Live Delivery
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="map-box">
+
+                                    <div class="road one"></div>
+
+                                    <div class="road two"></div>
+
+
+                                    <div class="map-pin restaurant-pin">
+
+                                        <i class="fa-solid fa-utensils"></i>
+
+                                    </div>
+
+
+                                    <div class="bike">
+
+                                        <i class="fa-solid fa-motorcycle"></i>
+
+                                    </div>
+
+
+                                    <div class="map-pin home-pin">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ITEMS -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-bag-shopping"></i>
+
+                                    <h2>
+                                        Ordered Items
+                                    </h2>
+
+                                </div>
+
+
+                                ${itemsHTML}
+
+
+                                <div style="
+                                    margin-top:12px;
+                                    color:#888;
+                                    font-size:9px;
+                                ">
+
+                                    ${itemCount} item${itemCount === 1 ? "" : "s"}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- RIGHT -->
+
+                        <div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <h2>
+                                        Delivery Address
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="address-box">
+
+                                    <div class="address-icon">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                    <div class="address-info">
+
+                                        <strong>
+                                            ${customer.type || "Home"}
+                                        </strong>
+
+                                        <p>
+
+                                            ${customer.name || ""}
+
+                                            <br>
+
+                                            ${customer.address || ""}
+
+                                            <br>
+
+                                            ${customer.city || ""} -
+                                            ${customer.pincode || ""}
+
+                                            <br>
+
+                                            📞 ${customer.phone || ""}
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- BILL -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-receipt"></i>
+
+                                    <h2>
+                                        Bill Details
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="bill-row">
+
+                                    <span>
+                                        Item Total
+                                    </span>
+
+                                    <strong>
+                                        ₹${subtotal}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="bill-row">
+
+                                    <span>
+                                        Delivery Fee
+                                    </span>
+
+                                    <strong>
+
+                                        ${
+                                            deliveryFee === 0
+                                                ? "FREE"
+                                                : "₹" + deliveryFee
+                                        }
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="bill-row">
+
+                                    <span>
+                                        Taxes & Charges
+                                    </span>
+
+                                    <strong>
+                                        ₹${tax}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="bill-row discount">
+
+                                    <span>
+                                        Discount
+                                    </span>
+
+                                    <strong>
+                                        - ₹${discount}
+                                    </strong>
+
+                                </div>
+
+
+                                <hr class="bill-divider">
+
+
+                                <div class="bill-total">
+
+                                    <span>
+                                        Total Paid
+                                    </span>
+
+                                    <span>
+                                        ₹${total}
+                                    </span>
+
+                                </div>
+
+
+                                <div style="
+                                    margin-top:12px;
+                                    padding:9px;
+                                    background:#f5fff8;
+                                    border-radius:7px;
+                                    font-size:9px;
+                                    color:#218c4d;
+                                ">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Payment:
+                                    ${order.payment || "UPI"}
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- SUPPORT -->
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-headset"></i>
+
+                                    <h2>
+                                        Need Help?
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="support-grid">
+
+
+                                    <button
+                                        class="support-btn"
+                                        onclick="contactSupport()">
+
+                                        <i class="fa-solid fa-headset"></i>
+
+                                        <span>
+                                            Help & Support
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="support-btn"
+                                        onclick="callSupport()">
+
+                                        <i class="fa-solid fa-phone"></i>
+
+                                        <span>
+                                            Contact Us
+                                        </span>
+
+                                    </button>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="menu.html"
+                                    class="action-btn secondary-btn">
+
+                                    Order More
+
+                                </a>
+
+
+                                <a
+                                    href="account.html"
+                                    class="action-btn primary-btn">
+
+                                    My Orders
+
+                                </a>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </main>
+
+            `;
+
+        }
+
+
+        /* =========================
+           SUPPORT
+        ========================= */
+
+        function contactSupport() {
+
+            window.location.href =
+                "contact.html";
+
+        }
+
+
+        function callSupport() {
+
+            alert(
+                "FreshBite Support\\n\\n" +
+                "Our support team is available to help you."
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
